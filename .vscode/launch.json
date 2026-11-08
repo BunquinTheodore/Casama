@@ -1,0 +1,19 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Casama (Live Supabase from .env)",
+      "request": "launch",
+      "type": "dart",
+      "args": [
+        "--dart-define-from-file=.env"
+      ]
+    },
+    {
+      "name": "Casama (High-Fidelity Mock Mode)",
+      "request": "launch",
+      "type": "dart"
+    }
+  ]
+}
+

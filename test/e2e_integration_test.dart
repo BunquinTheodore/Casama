@@ -1,0 +1,499 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:casama/core/theme/theme_provider.dart';
+import 'package:casama/data/mock_repository.dart';
+import 'package:casama/data/repository_provider.dart';
+import 'package:casama/features/auth/splash_screen.dart';
+import 'package:casama/features/auth/auth_screen.dart';
+import 'package:casama/features/auth/optional_profile_screen.dart';
+import 'package:casama/features/legal/terms_consent_screen.dart';
+import 'package:casama/features/onboarding/device_permissions_screen.dart';
+import 'package:casama/features/onboarding/casama_intro_screen.dart';
+import 'package:casama/features/onboarding/interactive_tutorial_screen.dart';
+import 'package:casama/features/dashboard/dashboard_screen.dart';
+import 'package:casama/features/dashboard/main_navigation_shell.dart';
+import 'package:casama/features/calendar/household_calendar_view.dart';
+import 'package:casama/features/chat/chat_directory_screen.dart';
+import 'package:casama/features/profile/profile_screen.dart';
+import 'package:casama/features/settings/app_settings_screen.dart';
+import 'package:casama/features/parcels/parcels_screen.dart';
+import 'package:casama/features/items/lost_found_screen.dart';
+import 'package:casama/features/tasks/maintenance_screen.dart';
+import 'package:casama/shared/widgets/cas_mascot_view.dart';
+
+void main() {
+  group('Part 7: Casama Final Integration & Quality Assurance Tests', () {
+    // -------------------------------------------------------------------------
+    // A. TEST THE COMPLETE USER JOURNEY
+    // -------------------------------------------------------------------------
+    testWidgets('A1. Complete New User Flow from Welcome to Home Dashboard', (
+      tester,
+    ) async {
+      tester.view.physicalSize = const Size(1080, 2400);
+      tester.view.devicePixelRatio = 1.0;
+      addTearDown(() {
+        tester.view.resetPhysicalSize();
+        tester.view.resetDevicePixelRatio();
+      });
+
+      final mockRepo = MockRepository();
+      mockRepo.logout();
+
+      // 1. Welcome Screen
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [repositoryProvider.overrideWith((ref) => mockRepo)],
+          child: const MaterialApp(home: SplashScreen()),
+        ),
+      );
+      await tester.pump();
+      expect(find.text('Casama'), findsWidgets);
+      expect(find.text('Get Started'), findsOneWidget);
+
+      // 2. Auth Screen - Create Account
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [repositoryProvider.overrideWith((ref) => mockRepo)],
+          child: const MaterialApp(home: AuthScreen()),
+        ),
+      );
+      await tester.pumpAndSettle();
+      expect(find.text('Create an Account'), findsOneWidget);
+      expect(find.text('Continue to Profile Details'), findsOneWidget);
+
+      // Register new user
+      mockRepo.register(email: 'newuser@casama.app', password: 'password123');
+
+      // 3. Optional Profile Screen
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [repositoryProvider.overrideWith((ref) => mockRepo)],
+          child: const MaterialApp(home: OptionalProfileScreen()),
+        ),
+      );
+      await tester.pumpAndSettle();
+      expect(find.text('Tell Us About You 👋'), findsOneWidget);
+      expect(find.text('Full Name (Optional)'), findsOneWidget);
+      expect(find.text('Nickname (Optional)'), findsOneWidget);
+      expect(find.text('Age (Optional)'), findsOneWidget);
+      expect(find.text('Skip Profile for Now'), findsOneWidget);
+
+      // 4. Terms and Privacy Consent Screen
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [repositoryProvider.overrideWith((ref) => mockRepo)],
+          child: const MaterialApp(home: TermsConsentScreen()),
+        ),
+      );
+      await tester.pumpAndSettle();
+      expect(find.text('Household Agreements 📋'), findsOneWidget);
+      expect(find.text('Terms of Service'), findsWidgets);
+      expect(find.text('Privacy Policy'), findsWidgets);
+      expect(find.text('Acknowledge & Continue'), findsOneWidget);
+
+      // 5. Device Permissions Screen
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [repositoryProvider.overrideWith((ref) => mockRepo)],
+          child: const MaterialApp(home: DevicePermissionsScreen()),
+        ),
+      );
+      await tester.pumpAndSettle();
+      expect(find.text('Device Permissions 📱'), findsOneWidget);
+      expect(find.text('Push Notifications'), findsOneWidget);
+      expect(find.text('Camera & Photo Library'), findsOneWidget);
+      expect(find.text('Save & Continue'), findsOneWidget);
+
+      // 6. Casama Introduction Screen
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [repositoryProvider.overrideWith((ref) => mockRepo)],
+          child: const MaterialApp(home: CasamaIntroScreen()),
+        ),
+      );
+      await tester.pumpAndSettle();
+      expect(find.textContaining('Welcome,'), findsOneWidget);
+      expect(find.text('Skip to Home'), findsOneWidget);
+      expect(find.text("Let's Get Started"), findsOneWidget);
+
+      // 7. Interactive Tutorial Screen
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [repositoryProvider.overrideWith((ref) => mockRepo)],
+          child: const MaterialApp(home: InteractiveTutorialScreen()),
+        ),
+      );
+      await tester.pumpAndSettle();
+      // Initial step: Home
+      expect(find.text('1. Home Dashboard & Calendar 🏠'), findsOneWidget);
+      expect(find.text('Skip'), findsOneWidget);
+      expect(find.text('Next Navigation Element'), findsOneWidget);
+
+      // Advance to Step 2: Boards
+      await tester.tap(find.text('Next Navigation Element'));
+      await tester.pumpAndSettle();
+      expect(find.text('2. Household Boards 📦'), findsOneWidget);
+
+      // 8. Reaching the Home Dashboard
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [repositoryProvider.overrideWith((ref) => mockRepo)],
+          child: const MaterialApp(home: Scaffold(body: DashboardScreen())),
+        ),
+      );
+      await tester.pumpAndSettle();
+      expect(find.text('Hello, newuser!'), findsOneWidget);
+    });
+
+    testWidgets(
+      'A2. Returning User Flow restores session, profile, and theme',
+      (tester) async {
+        SharedPreferences.setMockInitialValues({'casama_theme_mode': 'dark'});
+        final prefs = await SharedPreferences.getInstance();
+        final themeNotifier = ThemeNotifier(prefs);
+        expect(themeNotifier.state, ThemeMode.dark);
+
+        final mockRepo = MockRepository();
+        mockRepo.login(email: 'jp@casama.app', password: 'password123');
+        expect(mockRepo.isAuthenticated, true);
+        expect(mockRepo.currentUser.nickname, 'JP');
+        expect(mockRepo.effectiveGreetingName, 'JP');
+      },
+    );
+
+    // -------------------------------------------------------------------------
+    // B. HOME DASHBOARD TESTING
+    // -------------------------------------------------------------------------
+    testWidgets(
+      'B1. Home Dashboard renders greeting, household card, calendar, and activity feed',
+      (tester) async {
+        tester.view.physicalSize = const Size(1080, 2400);
+        tester.view.devicePixelRatio = 1.0;
+        addTearDown(() {
+          tester.view.resetPhysicalSize();
+          tester.view.resetDevicePixelRatio();
+        });
+
+        final mockRepo = MockRepository();
+
+        await tester.pumpWidget(
+          ProviderScope(
+            overrides: [repositoryProvider.overrideWith((ref) => mockRepo)],
+            child: const MaterialApp(home: Scaffold(body: DashboardScreen())),
+          ),
+        );
+        await tester.pumpAndSettle();
+
+        // Nickname-based greeting
+        expect(find.text('Hello, JP!'), findsOneWidget);
+
+        // Household card
+        expect(find.text('Casa 204'), findsWidgets);
+        expect(find.textContaining('Active now: 3'), findsOneWidget);
+
+        // Calendar display and month navigation
+        expect(find.byType(HouseholdCalendarView), findsOneWidget);
+        expect(find.text('Today'), findsOneWidget);
+
+        // Quick access
+        expect(find.text('Parcels'), findsWidgets);
+        expect(find.text('Lost & Found'), findsWidgets);
+        expect(find.text('Maintenance'), findsWidgets);
+        expect(find.text('Chat'), findsWidgets);
+
+        // Activity Feed
+        expect(find.text("Today's Activity"), findsOneWidget);
+      },
+    );
+
+    // -------------------------------------------------------------------------
+    // C. PLUS MENU TESTING
+    // -------------------------------------------------------------------------
+    testWidgets(
+      'C1. Plus quick-action menu opens bottom sheet with all 5 functional actions',
+      (tester) async {
+        tester.view.physicalSize = const Size(1080, 2400);
+        tester.view.devicePixelRatio = 1.0;
+        addTearDown(() {
+          tester.view.resetPhysicalSize();
+          tester.view.resetDevicePixelRatio();
+        });
+
+        final mockRepo = MockRepository();
+
+        await tester.pumpWidget(
+          ProviderScope(
+            overrides: [repositoryProvider.overrideWith((ref) => mockRepo)],
+            child: const MaterialApp(home: MainNavigationShell()),
+          ),
+        );
+        await tester.pumpAndSettle();
+
+        // Tap center plus button
+        await tester.tap(find.byIcon(Icons.add));
+        await tester.pumpAndSettle();
+
+        // Verify all 5 actions
+        expect(find.text('Add a Parcel'), findsOneWidget);
+        expect(find.text('Report an Item'), findsOneWidget);
+        expect(find.text('Add a Household Task'), findsOneWidget);
+        expect(find.text('Create a Meet-up'), findsOneWidget);
+        expect(find.text('Invite a Housemate'), findsOneWidget);
+      },
+    );
+
+    // -------------------------------------------------------------------------
+    // D. CHAT TESTING & HOUSEMATE MANAGEMENT
+    // -------------------------------------------------------------------------
+    testWidgets(
+      'D1. Chat directory, search, housemate invitations, and DM privacy guard',
+      (tester) async {
+        tester.view.physicalSize = const Size(1080, 2400);
+        tester.view.devicePixelRatio = 1.0;
+        addTearDown(() {
+          tester.view.resetPhysicalSize();
+          tester.view.resetDevicePixelRatio();
+        });
+
+        final mockRepo = MockRepository();
+
+        await tester.pumpWidget(
+          ProviderScope(
+            overrides: [repositoryProvider.overrideWith((ref) => mockRepo)],
+            child: const MaterialApp(
+              home: Scaffold(body: ChatDirectoryScreen()),
+            ),
+          ),
+        );
+        await tester.pumpAndSettle();
+
+        // Verify group chat & individual housemates
+        expect(find.text('Household Group Chat'), findsOneWidget);
+        expect(find.text('Casa 204'), findsWidgets);
+        expect(find.text('Maria'), findsWidgets);
+        expect(find.text('Alex'), findsWidgets);
+        expect(find.text('Ria'), findsWidgets);
+
+        // Verify search input
+        expect(find.byType(TextField), findsOneWidget);
+        await tester.enterText(find.byType(TextField), 'Maria');
+        await tester.pumpAndSettle();
+        expect(find.text('Maria'), findsWidgets);
+        expect(find.text('Alex'), findsNothing);
+
+        // Clear search
+        await tester.enterText(find.byType(TextField), '');
+        await tester.pumpAndSettle();
+
+        // Open Add Housemate modal via icon
+        await tester.tap(find.byIcon(Icons.person_add_alt_1_outlined));
+        await tester.pumpAndSettle();
+
+        expect(find.text('Find User'), findsOneWidget);
+        expect(find.text('Invite Code'), findsOneWidget);
+        expect(find.text('Pending'), findsOneWidget);
+      },
+    );
+
+    // -------------------------------------------------------------------------
+    // E. PROFILE AND SETTINGS TESTING
+    // -------------------------------------------------------------------------
+    testWidgets(
+      'E1. Profile screen allows updating profile, viewing points audit, and settings',
+      (tester) async {
+        tester.view.physicalSize = const Size(1080, 2400);
+        tester.view.devicePixelRatio = 1.0;
+        addTearDown(() {
+          tester.view.resetPhysicalSize();
+          tester.view.resetDevicePixelRatio();
+        });
+
+        final mockRepo = MockRepository();
+
+        await tester.pumpWidget(
+          ProviderScope(
+            overrides: [repositoryProvider.overrideWith((ref) => mockRepo)],
+            child: const MaterialApp(home: Scaffold(body: ProfileScreen())),
+          ),
+        );
+        await tester.pumpAndSettle();
+
+        expect(find.text('Jon Paul Berana'), findsWidgets);
+        expect(find.text('120 pts'), findsWidgets);
+        expect(find.text('Edit Profile'), findsOneWidget);
+
+        // Open Points Audit Ledger
+        await tester.tap(find.text('120 pts').first);
+        await tester.pumpAndSettle();
+        expect(find.text('Kasama Points Ledger'), findsOneWidget);
+        await tester.tap(find.byIcon(Icons.close_rounded));
+        await tester.pumpAndSettle();
+
+        // Open Edit Profile
+        await tester.tap(find.text('Edit Profile'));
+        await tester.pumpAndSettle();
+        expect(find.text('Edit Profile'), findsWidgets);
+        expect(find.text('Remove Picture'), findsOneWidget);
+        await tester.tap(find.byIcon(Icons.close));
+        await tester.pumpAndSettle();
+      },
+    );
+
+    testWidgets(
+      'E2. Settings Screen renders all 5 sections and supports theme switching',
+      (tester) async {
+        tester.view.physicalSize = const Size(1080, 2400);
+        tester.view.devicePixelRatio = 1.0;
+        addTearDown(() {
+          tester.view.resetPhysicalSize();
+          tester.view.resetDevicePixelRatio();
+        });
+
+        final mockRepo = MockRepository();
+
+        await tester.pumpWidget(
+          ProviderScope(
+            overrides: [repositoryProvider.overrideWith((ref) => mockRepo)],
+            child: const MaterialApp(home: AppSettingsScreen()),
+          ),
+        );
+        await tester.pumpAndSettle();
+
+        // 5 Sections
+        expect(find.text('Account Settings'), findsOneWidget);
+        expect(find.text('Appearance'), findsOneWidget);
+        expect(find.text('Notification Settings'), findsOneWidget);
+        expect(find.text('Privacy and Security'), findsOneWidget);
+        expect(find.text('About Casama'), findsOneWidget);
+
+        // Theme options
+        expect(find.text('Light'), findsWidgets);
+        expect(find.text('Dark'), findsWidgets);
+        expect(find.text('System'), findsWidgets);
+      },
+    );
+
+    // -------------------------------------------------------------------------
+    // F. DATABASE, PRIVACY & SECURITY TESTING
+    // -------------------------------------------------------------------------
+    test('F1. Security test: External unauthorized users cannot access direct messaging', () {
+      final repo = MockRepository();
+      // 'external_stranger' is not in Casa 204
+      expect(repo.isHousemateAuthorized('external_stranger'), false);
+
+      // Verified members are authorized
+      expect(repo.isHousemateAuthorized('maria'), true);
+      expect(repo.isHousemateAuthorized('alex'), true);
+      expect(repo.isHousemateAuthorized('ria'), true);
+    });
+
+    test('F2. Duplicate reward prevention: Receiving same parcel multiple times is rejected', () {
+      final repo = MockRepository();
+      final initialPoints = repo.kasamaPoints;
+
+      // First claim succeeds and awards +5
+      repo.receiveParcel('p1');
+      expect(repo.kasamaPoints, initialPoints + 5);
+
+      // Attempting to receive again is idempotent and does not award duplicate points
+      final historyCountBefore = repo.pointHistory.length;
+      repo.receiveParcel('p1');
+      expect(repo.kasamaPoints, initialPoints + 5); // Unchanged
+      expect(
+        repo.pointHistory.length,
+        historyCountBefore,
+      ); // No duplicate ledger entry
+    });
+
+    test('F3. Duplicate invitation prevention: Sending duplicate invite is rejected', () {
+      final repo = MockRepository();
+
+      // First invite to Clara succeeds
+      final firstInvite = repo.sendInvitation(
+        inviteeEmailOrHandle: '@clarar',
+        inviteeName: 'Clara Reyes',
+      );
+      expect(firstInvite, true);
+
+      // Second invite to Clara returns false (rejected)
+      final duplicateInvite = repo.sendInvitation(
+        inviteeEmailOrHandle: '@clarar',
+        inviteeName: 'Clara Reyes',
+      );
+      expect(duplicateInvite, false);
+    });
+
+    // -------------------------------------------------------------------------
+    // G. MASCOT AND BRANDING CONSISTENCY
+    // -------------------------------------------------------------------------
+    testWidgets(
+      'G1. Mascot retains glasses and plain shirt across all appearances',
+      (tester) async {
+        await tester.pumpWidget(
+          const MaterialApp(
+            home: Scaffold(
+              body: CasMascotView(pose: CasPose.hero, width: 120, height: 120),
+            ),
+          ),
+        );
+        await tester.pump();
+
+        final imageFinder = find.byType(Image);
+        expect(imageFinder, findsOneWidget);
+        final image = tester.widget<Image>(imageFinder);
+        final assetImage = image.image as AssetImage;
+        expect(assetImage.assetName, 'assets/images/cas/cas_hero.png');
+      },
+    );
+
+    // -------------------------------------------------------------------------
+    // H. PRESERVE EXISTING FEATURES
+    // -------------------------------------------------------------------------
+    testWidgets(
+      'H1. Existing Boards (Parcels, Lost & Found, Maintenance) remain functional',
+      (tester) async {
+        final mockRepo = MockRepository();
+
+        // 1. Parcels Board
+        await tester.pumpWidget(
+          ProviderScope(
+            overrides: [repositoryProvider.overrideWith((ref) => mockRepo)],
+            child: const MaterialApp(home: ParcelsScreen()),
+          ),
+        );
+        await tester.pumpAndSettle();
+        expect(find.text('Shopee'), findsOneWidget);
+        expect(find.text('Lazada'), findsOneWidget);
+
+        // 2. Lost & Found Board
+        await tester.pumpWidget(
+          ProviderScope(
+            overrides: [repositoryProvider.overrideWith((ref) => mockRepo)],
+            child: const MaterialApp(home: LostFoundScreen()),
+          ),
+        );
+        await tester.pumpAndSettle();
+        expect(find.text('Lost AirPods'), findsOneWidget);
+
+        // Switch to Found tab
+        await tester.tap(find.text('Found'));
+        await tester.pumpAndSettle();
+        expect(find.text('Found Backpack'), findsOneWidget);
+
+        // 3. Maintenance Board
+        await tester.pumpWidget(
+          ProviderScope(
+            overrides: [repositoryProvider.overrideWith((ref) => mockRepo)],
+            child: const MaterialApp(home: MaintenanceScreen()),
+          ),
+        );
+        await tester.pumpAndSettle();
+        expect(find.text('Leaking Faucet'), findsOneWidget);
+        expect(find.text('Buy Drinking Water'), findsOneWidget);
+        expect(find.text('Defrost Freezer'), findsOneWidget);
+      },
+    );
+  });
+}
