@@ -5,6 +5,10 @@
 > Mobile application built with **Flutter**, **Supabase**, **Riverpod**, and **GoRouter**.
 - Final Project For Application Development
 
+[![Android APK](https://img.shields.io/badge/Android-APK%20Ready%20(59.5MB)-3DDC84?logo=android&logoColor=white)](#-android-apk-build--installation)
+[![Tests](https://img.shields.io/badge/Tests-78%20Passed-success)](#-testing--analysis)
+[![Platform](https://img.shields.io/badge/Platform-Android%20%7C%20iOS%20%7C%20macOS%20%7C%20Web-navy)](#)
+
 ---
 
 ## 📱 Overview
@@ -77,11 +81,53 @@ flutter run -d chrome
 
 ---
 
-## 🧪 Testing & Analysis
+## 📦 Android APK (Build & Installation)
+
+You can build and install Casama directly onto any Android device (phone, tablet, or emulator) without needing an app store.
+
+### 1. Pre-built Release APK
+The optimized production APK has already been compiled:
+* **Path**: `build/app/outputs/flutter-apk/app-release.apk`
+* **Size**: `~59.5 MB` (Self-contained, includes all assets, mascot graphics, and fonts)
+* **Android Target**: Android 5.0 (API 21) up to Android 15 (API 35+)
+
+### 2. How to Build the APK
+To recompile the APK at any time, run:
+
+```bash
+# Build standalone release APK
+flutter build apk --release
+
+# Or build split APKs (reduces size to ~18 MB per architecture)
+flutter build apk --split-per-abi
+```
+
+### 3. How to Install on Your Android Phone
+
+#### Method A: Direct Install via USB (ADB)
+Connect your phone with **USB Debugging** enabled and run:
+```bash
+adb install -r build/app/outputs/flutter-apk/app-release.apk
+```
+
+#### Method B: Wireless / Direct Sideloading
+1. Transfer `build/app/outputs/flutter-apk/app-release.apk` to your phone via Google Drive, Telegram, USB, or direct transfer.
+2. Open your phone's **Files** or **Downloads** app and tap `app-release.apk`.
+3. If prompted, allow *"Install unknown apps"* in Android settings.
+4. Tap **Install** and open Casama!
+
+#### Method C: GitHub Releases (For evaluators & classmates)
+To share the APK via a direct download link:
+1. Go to your GitHub repository ➔ **Releases** ➔ **Draft a new release**.
+2. Tag a version (e.g. `v1.0.0`).
+3. Drag and drop `build/app/outputs/flutter-apk/app-release.apk` into the release binaries section.
+4. Click **Publish release**. Anyone can now download and install it with 1 click.
+
+---
 
 ## 🧪 Testing & Analysis
 
-Casama comes with a comprehensive suite of **63 automated tests** (27 unit tests + 36 widget tests) verifying full application workflows, authorization rules, and state management:
+Casama comes with a comprehensive suite of **78 automated tests** (30 unit tests + 48 widget/integration tests) verifying full application workflows, authorization rules, and state management:
 
 ```bash
 # Run static analysis (zero warnings/errors enforced)
