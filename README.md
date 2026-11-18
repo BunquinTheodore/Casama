@@ -3,6 +3,7 @@
 > **Making shared living simpler, warmer, and more coordinated.**
 >
 > Mobile application built with **Flutter**, **Supabase**, **Riverpod**, and **GoRouter**.
+- Final Project For Application Development
 
 ---
 
