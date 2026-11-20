@@ -1,0 +1,34 @@
+{
+  "train_orders": 43285,
+  "test_orders": 52450,
+  "split": "train before 2018-01, test from 2018-01",
+  "stage_1_at_purchase": {
+    "roc_auc": 0.592,
+    "average_precision": 0.115,
+    "base_late_rate_pct": 9.1,
+    "alert_cutoff": 0.508,
+    "alert_precision_pct": 11.3,
+    "alert_recall_pct": 17.0,
+    "importance": {
+      "estimated_days": 0.0515,
+      "purchase_weekday": 0.0013,
+      "purchase_hour": 0.0015,
+      "month_of_year": 0.0506
+    }
+  },
+  "stage_2_after_shipping": {
+    "roc_auc": 0.649,
+    "average_precision": 0.253,
+    "base_late_rate_pct": 9.1,
+    "alert_cutoff": 0.47,
+    "alert_precision_pct": 20.4,
+    "alert_recall_pct": 30.7,
+    "importance": {
+      "estimated_days": 0.0425,
+      "purchase_weekday": 0.0048,
+      "purchase_hour": 0.0012,
+      "month_of_year": 0.0202,
+      "handoff_days": 0.0892
+    }
+  }
+}

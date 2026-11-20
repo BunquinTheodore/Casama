@@ -50,3 +50,8 @@ app.*.map.json
 
 # Widget Preview related
 .widget_preview/
+
+# Data science analysis
+/data/
+__pycache__/
+analysis/output/late_model.joblib
