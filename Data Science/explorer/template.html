@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Parcel Timing Explorer</title>
+<meta name="description" content="What real marketplace orders, plus weather and public holidays, say about late deliveries. A Casama data science project by group Theoraux.">
+<style>/*@css*/</style>
+</head>
+<body>
+
+<nav class="pill" aria-label="Sections">
+  <div class="links">
+    <a href="#home" data-s="home">Home</a>
+    <a href="#s01" data-s="s01" title="The question">01</a>
+    <a href="#s02" data-s="s02" title="The data">02</a>
+    <a href="#s03" data-s="s03" title="Cleaning">03</a>
+    <a href="#s04" data-s="s04" title="What the data shows">04</a>
+    <a href="#s05" data-s="s05" title="Weather and holidays">05</a>
+    <a href="#s06" data-s="s06" title="Can we predict late parcels">06</a>
+    <a href="#s07" data-s="s07" title="Takeaways">07</a>
+    <a href="#s08" data-s="s08" title="From findings to Casama">08</a>
+    <a href="#s09" data-s="s09" title="What this does not prove">09</a>
+    <a href="#s10" data-s="s10" title="Definitions, references and credits">10</a>
+    <span class="slide"></span>
+  </div>
+</nav>
+
+<section class="hero" id="home">
+  <div class="wrap">
+    <h1><span>Parcels arrive</span><span>when nobody is in</span></h1>
+    <p class="tagline">What {{cleaning.analysed}} real orders, plus weather and holidays, say about late deliveries</p>
+    <p class="lead">Casama helps housemates coordinate who receives a parcel. This page asks when parcels turn up late, using real marketplace orders, daily weather from Open-Meteo and public holidays from Nager.Date. It is the Data Science final project of group Theoraux.</p>
+    <div class="stats">
+      <div class="stat"><div class="num">{{late.rate_pct|2}}%</div><div class="lbl">of parcels arrive after the estimate</div></div>
+      <div class="stat"><div class="num">{{delivery_days.median|1}}</div><div class="lbl">days is the median delivery</div></div>
+      <div class="stat"><div class="num">{{cleaning.analysed}}</div><div class="lbl">parcels analysed</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="dark" id="s01">
+  <div class="wrap fade">
+    <div class="label">01</div>
+    <h2>The question</h2>
+    <p>A parcel that arrives late is a parcel that may arrive when nobody is home. Casama's parcel board tracks incoming couriers, who is in, and cash on delivery owed. If we knew early which parcels tend to run late, the board could warn housemates sooner.</p>
+    <p>So we ask when parcels arrive late, and whether weather or holidays help explain it. These three questions were written down before we looked at any result.</p>
+    <ol class="takeaways">
+      <li>Parcels that see more heavy rain days at their destination in the {{h1.window_days}} days after the seller hands them to the carrier are late more often.</li>
+      <li>Parcels with a national holiday in that same window are late more often.</li>
+      <li>Adding weather and holiday facts makes a late parcel model more accurate than one that only knows when the seller handed the parcel over.</li>
+    </ol>
+    <p>Each question is answered whichever way it turns out.</p>
+  </div>
+</section>
+
+<section id="s02">
+  <div class="wrap fade">
+    <div class="label">02</div>
+    <h2>The data</h2>
+    <p>Four sources feed the analysis. Two are files from Kaggle and two are free public APIs that anyone can call without a key.</p>
+    <div class="table-scroll">
+    <table>
+      <thead><tr><th>Source</th><th>What it gives</th><th>How we get it</th></tr></thead>
+      <tbody>
+        <tr><td>Olist orders</td><td>Purchase, approval, carrier handoff, delivery and estimated dates for {{cleaning.raw_orders}} orders</td><td>Kaggle download</td></tr>
+        <tr><td>Olist customers</td><td>The state of each customer, joined on the customer id</td><td>Kaggle download</td></tr>
+        <tr><td>Open-Meteo</td><td>Daily rain and temperature at each state capital</td><td>Historical Weather API</td></tr>
+        <tr><td>Nager.Date</td><td>Nationwide public holidays</td><td>Public holidays API</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <pre>GET https://archive-api.open-meteo.com/v1/archive?latitude=...&amp;longitude=...&amp;daily=precipitation_sum
+GET https://date.nager.at/api/v3/PublicHolidays/{year}/{country}</pre>
+    <p>Weather is taken at one point per state, its capital, so it is a coarse stand in for the weather along a parcel's real route. The orders cover purchases from {{limits.first_month_name}} to {{limits.last_month_name}}. They are Brazilian orders, not Philippine ones, and no file says which courier carried a parcel or whether it was cash on delivery.</p>
+  </div>
+</section>
+
+<section class="dark" id="s03">
+  <div class="wrap fade">
+    <div class="label">03</div>
+    <h2>Cleaning</h2>
+    <p>We started from {{cleaning.raw_orders}} orders. {{cleaning.undelivered}} were never delivered. Of the {{cleaning.delivered_with_date}} with a delivery date, we removed {{cleaning.dropped}} with impossible or extreme timings: a step recorded before the purchase, a delivery time of zero or less, a journey longer than two months, or a purchase from before {{limits.first_month_name}}. That leaves {{cleaning.analysed}}, which is {{cleaning.kept_pct|1}}% of everything.</p>
+    <figure class="chart" data-chart="cleaning_funnel">
+      <div class="plot" role="img" aria-label="Orders left after each cleaning step"></div>
+      <figcaption>Orders left after each cleaning step.<span class="src">Source: Olist orders, our calculation.</span></figcaption>
+    </figure>
+    <h3>What counts as late</h3>
+    <p>A parcel is late if it arrives on a later calendar day than the estimated date. Estimates are stored at midnight, so judging by the clock would label {{data_note.clock_only_late}} parcels that arrived on the promised day as late. Under that clock rule the late rate would be {{data_note.late_pct_timestamp_rule|2}}% instead of {{late.rate_pct|2}}%.</p>
+  </div>
+</section>
+
+<section id="s04">
+  <div class="wrap fade">
+    <div class="label">04</div>
+    <h2>What the data shows</h2>
+    <div class="pair">
+      <figure class="chart" data-chart="delivery_hist">
+        <div class="plot" role="img" aria-label="Histogram of days from purchase to delivery"></div>
+        <figcaption>The median parcel takes {{delivery_days.median|1}} days from purchase to delivery, and one in ten takes more than {{delivery_days.p90|1}} days.<span class="src">Source: Olist orders.</span></figcaption>
+      </figure>
+      <figure class="chart" data-chart="estimate_gap_hist">
+        <div class="plot" role="img" aria-label="Histogram of days delivered before or after the estimate"></div>
+        <figcaption>Estimates are padded. The typical parcel arrives {{late.median_days_early|1}} days before the estimate and {{late.rate_pct|2}}% arrive after it (orange).<span class="src">Source: Olist orders.</span></figcaption>
+      </figure>
+    </div>
+    <div class="controls">
+      <label>From <select id="month-from">{{@month_options_from}}</select></label>
+      <label>To <select id="month-to">{{@month_options_to}}</select></label>
+    </div>
+    <figure class="chart" data-chart="late_by_month">
+      <div class="plot" role="img" aria-label="Late rate by month"></div>
+      <figcaption>Lateness spikes in some months. {{late.worst_month_name}} was the worst at {{late.worst_month_late_pct|1}}% late, and the best month was {{late.best_month_late_pct|1}}%. Months at ten percent or more are orange.<span class="src">Source: Olist orders, months with enough orders only.</span></figcaption>
+    </figure>
+    <div class="pair">
+      <figure class="chart" data-chart="late_by_handoff">
+        <div class="plot" role="img" aria-label="Late rate by seller handoff time"></div>
+        <figcaption>A slow seller is the strongest warning sign. When the seller takes a week or more to hand over the parcel, {{handoff.late_pct_slow|1}}% are late, against {{handoff.late_pct_fast|1}}% when it takes under a day.<span class="src">Source: Olist orders.</span></figcaption>
+      </figure>
+      <figure class="chart" data-chart="late_by_promise">
+        <div class="plot" role="img" aria-label="Late rate by promised days"></div>
+        <figcaption>Short promises are broken most often: {{late.late_pct_shortest_promise|1}}% late when under ten days were promised, and {{late.late_pct_longest_promise|1}}% when thirty or more were.<span class="src">Source: Olist orders.</span></figcaption>
+      </figure>
+    </div>
+    <figure class="chart" data-chart="order_rhythm">
+      <div class="plot" role="img" aria-label="Orders by weekday and hour"></div>
+      <figcaption>People shop in the afternoon and evening. The busiest hour of the day is hour {{delivery_days.busiest_hour}} on a twenty four hour clock. Darker cells have more orders.<span class="src">Source: Olist orders.</span></figcaption>
+    </figure>
+    <figure class="chart" data-chart="volume_vs_late">
+      <div class="plot" role="img" aria-label="Monthly orders and late rate"></div>
+      <figcaption>Busy months tend to be late months, with a correlation of {{late.volume_late_correlation|2}} between monthly orders and the late rate. Grey bars are orders and the orange line is the share late.<span class="src">Source: Olist orders.</span></figcaption>
+    </figure>
+    <div class="pair">
+      <figure class="chart" data-chart="delivery_spread">
+        <div class="plot" role="img" aria-label="Delivery time spread by seller handoff time"></div>
+        <figcaption>A slow seller delays the whole journey: a median of {{handoff.median_total_days_slow|1}} days in total when the handoff takes a week or more, against {{handoff.median_total_days_fast|1}} days when it takes under a day.<span class="src">Source: Olist orders.</span></figcaption>
+      </figure>
+      <figure class="chart" data-chart="promise_vs_actual">
+        <div class="plot" role="img" aria-label="Promised versus actual days"></div>
+        <figcaption>Most parcels land well under the promise. The cloud above the orange line is the late parcels. A random sample is shown.<span class="src">Source: Olist orders.</span></figcaption>
+      </figure>
+    </div>
+    <figure class="chart" data-chart="correlation">
+      <div class="plot" role="img" aria-label="Correlation between delivery signals"></div>
+      <figcaption>Which signals move together. Seller handoff days link most with lateness, with a correlation of {{handoff.corr_handoff_late|2}}. Darker means a stronger link, in either direction.<span class="src">Source: Olist orders.</span></figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="dark" id="s05">
+  <div class="wrap fade">
+    <div class="label">05</div>
+    <h2>Weather and holidays</h2>
+    <p>For each parcel we look at the {{h1.window_days}} days starting on the day the seller hands it to the carrier. A heavy rain day is a day with at least {{h1.heavy_mm|0}} mm of rain at the destination state capital, following the ETCCDI R10mm climate index. Holidays are nationwide public holidays. Intervals on late rates are ninety five percent bootstrap intervals. Adjusted odds ratios account for the month of purchase and the state, and their ninety five percent intervals allow for parcels handed over in the same week being alike, so they are wider than a plain fit would give.</p>
+    <h3>Heavy rain</h3>
+    <figure class="chart" data-chart="rain_dose">
+      <div class="plot" role="img" aria-label="Late rate by number of heavy rain days"></div>
+      <figcaption>Late rate by the number of heavy rain days in the window, with ninety five percent intervals. The raw rate climbs from {{h1.late_pct_no_heavy_rain|1}}% with no heavy rain day to {{h1.late_pct_three_or_more|1}}% with three or more.<span class="src">Source: Olist orders with Open-Meteo weather.</span></figcaption>
+    </figure>
+    <p class="verdict">{{#if h1.verdict=supported}}<b>Supported.</b> Even after accounting for month and state, each extra heavy rain day raised the odds of a late parcel by a factor of {{h1.adjusted_or.odds_ratio|2}} (interval {{h1.adjusted_or.ci_low|2}} to {{h1.adjusted_or.ci_high|2}}).{{/if}}{{#if h1.verdict=no clear effect}}<b>No clear effect.</b> The raw gradient disappears once month and state are taken into account. Each extra heavy rain day changes the odds of a late parcel by a factor of {{h1.adjusted_or.odds_ratio|2}} (interval {{h1.adjusted_or.ci_low|2}} to {{h1.adjusted_or.ci_high|2}}), which cannot be told apart from no effect. Rain on its own did not explain late parcels here.{{/if}}{{#if h1.verdict=opposite}}<b>The opposite.</b> After accounting for month and state, each extra heavy rain day lowered the odds of a late parcel by a factor of {{h1.adjusted_or.odds_ratio|2}} (interval {{h1.adjusted_or.ci_low|2}} to {{h1.adjusted_or.ci_high|2}}). We did not test why.{{/if}}</p>
+    <h3>Public holidays</h3>
+    <figure class="chart" data-chart="holiday_effect">
+      <div class="plot" role="img" aria-label="Late rate with and without a holiday in the window"></div>
+      <figcaption>Late rate for parcels with and without a nationwide holiday in the window, with ninety five percent intervals. {{h2.parcels_with_holiday}} parcels had a holiday in their window.<span class="src">Source: Olist orders with Nager.Date holidays.</span></figcaption>
+    </figure>
+    <p class="verdict">{{#if h2.verdict=supported}}<b>Supported.</b> Parcels with a holiday in their window were late more often: {{h2.late_pct_with_holiday|1}}% against {{h2.late_pct_without|1}}%, an adjusted odds ratio of {{h2.adjusted_or.odds_ratio|2}} (interval {{h2.adjusted_or.ci_low|2}} to {{h2.adjusted_or.ci_high|2}}).{{/if}}{{#if h2.verdict=no clear effect}}<b>No clear effect.</b> Parcels with a holiday in their window were late {{h2.late_pct_with_holiday|1}}% of the time against {{h2.late_pct_without|1}}%, an adjusted odds ratio of {{h2.adjusted_or.odds_ratio|2}} (interval {{h2.adjusted_or.ci_low|2}} to {{h2.adjusted_or.ci_high|2}}), which cannot be told apart from no effect.{{/if}}{{#if h2.verdict=opposite}}<b>The opposite of our guess.</b> Parcels with a holiday in their window were late less often: {{h2.late_pct_with_holiday|1}}% against {{h2.late_pct_without|1}}%, an adjusted odds ratio of {{h2.adjusted_or.odds_ratio|2}} (interval {{h2.adjusted_or.ci_low|2}} to {{h2.adjusted_or.ci_high|2}}). We did not test why, so we make no claim about the cause.{{/if}}</p>
+    <h3>Heavy rain by state</h3>
+    <div class="controls">
+      <label>State <select id="state-filter">{{@state_options}}</select></label>
+    </div>
+    <figure class="chart" data-chart="state_rain">
+      <div class="plot" role="img" aria-label="Late rate with and without heavy rain in one state"></div>
+      <figcaption><span id="state-note"></span><span class="src">Source: Olist orders with Open-Meteo weather. Intervals are shown only where a group has enough parcels.</span></figcaption>
+    </figure>
+    <h3>Other window lengths</h3>
+    <p>The same analysis with longer windows, so a reader can check that the headline does not depend on choosing seven days. Odds ratios are adjusted for month and state, with intervals in brackets.</p>
+    <div class="table-scroll">
+    <table>
+      <thead><tr><th>Window</th><th>Heavy rain days</th><th>Holiday in window</th><th>Model accuracy gain</th></tr></thead>
+      <tbody>
+        <tr><td>Seven days (headline)</td><td>{{h1.adjusted_or.odds_ratio|2}} ({{h1.adjusted_or.ci_low|2}} to {{h1.adjusted_or.ci_high|2}})</td><td>{{h2.adjusted_or.odds_ratio|2}} ({{h2.adjusted_or.ci_low|2}} to {{h2.adjusted_or.ci_high|2}})</td><td>{{h3.diff|3}} ({{h3.diff_ci_low|3}} to {{h3.diff_ci_high|3}})</td></tr>
+        <tr><td>Ten days</td><td>{{sensitivity.10.h1_or.odds_ratio|2}} ({{sensitivity.10.h1_or.ci_low|2}} to {{sensitivity.10.h1_or.ci_high|2}})</td><td>{{sensitivity.10.h2_or.odds_ratio|2}} ({{sensitivity.10.h2_or.ci_low|2}} to {{sensitivity.10.h2_or.ci_high|2}})</td><td>{{sensitivity.10.h3_diff.diff|3}} ({{sensitivity.10.h3_diff.ci_low|3}} to {{sensitivity.10.h3_diff.ci_high|3}})</td></tr>
+        <tr><td>Fourteen days</td><td>{{sensitivity.14.h1_or.odds_ratio|2}} ({{sensitivity.14.h1_or.ci_low|2}} to {{sensitivity.14.h1_or.ci_high|2}})</td><td>{{sensitivity.14.h2_or.odds_ratio|2}} ({{sensitivity.14.h2_or.ci_low|2}} to {{sensitivity.14.h2_or.ci_high|2}})</td><td>{{sensitivity.14.h3_diff.diff|3}} ({{sensitivity.14.h3_diff.ci_low|3}} to {{sensitivity.14.h3_diff.ci_high|3}})</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+</section>
+
+<section id="s06">
+  <div class="wrap fade">
+    <div class="label">06</div>
+    <h2>Can we predict late parcels</h2>
+    <p>We trained a gradient boosting model on parcels bought before {{limits.split_month_name}} ({{h3.train_orders}} parcels) and tested it on {{h3.test_orders}} later parcels it had never seen. Three versions know more and more: one at purchase, one after the seller ships, and one that also knows the weather and holidays after handoff.</p>
+    <div class="table-scroll">
+    <table>
+      <thead><tr><th>Model</th><th>What it knows</th><th>AUC</th></tr></thead>
+      <tbody>
+        <tr><td>At purchase</td><td>Days promised, weekday, hour and month of the order</td><td>{{h3.auc_stage_1|3}}</td></tr>
+        <tr><td>After shipping</td><td>Everything above plus how long the seller took to hand over the parcel</td><td>{{h3.auc_stage_2|3}}</td></tr>
+        <tr><td>With weather and holidays</td><td>Everything above plus heavy rain days, total rain and a holiday flag for the window</td><td>{{h3.auc_stage_3|3}}</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p>AUC measures how well a model ranks late parcels above on time ones. A coin toss scores one half and a perfect model scores one.</p>
+    <div class="pair">
+      <figure class="chart" data-chart="roc_curves">
+        <div class="plot" role="img" aria-label="ROC curves of the three models"></div>
+        <figcaption>Share of late parcels caught against share of on time parcels wrongly flagged. The dashed diagonal is random guessing.<span class="src">Source: test parcels, our model.</span></figcaption>
+      </figure>
+      <figure class="chart" data-chart="importance">
+        <div class="plot" role="img" aria-label="What the weather and holiday model relies on"></div>
+        <figcaption>What the last model relies on: how much accuracy drops when each signal is hidden. Weather and holiday signals are orange.<span class="src">Source: permutation importance on test parcels.</span></figcaption>
+      </figure>
+    </div>
+    <p class="verdict">{{#if h3.verdict=improved}}<b>Improved.</b> Adding weather and holiday facts raised the AUC from {{h3.auc_stage_2|3}} to {{h3.auc_stage_3|3}}, a gain of {{h3.diff|3}} (interval {{h3.diff_ci_low|3}} to {{h3.diff_ci_high|3}}). Of the added signals, {{h3.top_added_label}} mattered most (importance {{h3.top_added_importance|3}}). We did not test whether the gain mostly reflects where parcels were sent or the time of year, because weather differs by state and by season, so read it as a modest association.{{/if}}{{#if h3.verdict=no clear improvement}}<b>No clear improvement.</b> The AUC moved from {{h3.auc_stage_2|3}} to {{h3.auc_stage_3|3}}, a change of {{h3.diff|3}} (interval {{h3.diff_ci_low|3}} to {{h3.diff_ci_high|3}}), which cannot be told apart from no change.{{/if}}{{#if h3.verdict=worse}}<b>Worse.</b> The AUC fell from {{h3.auc_stage_2|3}} to {{h3.auc_stage_3|3}}, a change of {{h3.diff|3}} (interval {{h3.diff_ci_low|3}} to {{h3.diff_ci_high|3}}).{{/if}}</p>
+    <p>The model is modest. Flagging the riskiest parcels catches {{h3.alert_recall_stage_3|1}}% of the late ones, with {{h3.alert_precision_stage_3|1}}% of the flags correct, against a late rate of {{h3.test_late_rate_pct|1}}% in the test months. The weather here is observed after the fact, so this explains parcels that already arrived. It is not a forecast the app could use today.</p>
+    <figure class="chart" data-chart="risk_deciles">
+      <div class="plot" role="img" aria-label="Late rate by predicted risk decile"></div>
+      <figcaption>Test parcels ranked by predicted risk from safest to riskiest, and how often each tenth was actually late.<span class="src">Source: test parcels, our model.</span></figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="dark" id="s07">
+  <div class="wrap fade">
+    <div class="label">07</div>
+    <h2>Takeaways</h2>
+    <ol class="takeaways">
+      <li>About {{late.rate_pct|1}}% of parcels arrive after the estimate. Most arrive well before it.</li>
+      <li>The seller's handoff time is the strongest warning sign: {{handoff.late_pct_slow|1}}% late when the seller is slow, against {{handoff.late_pct_fast|1}}% when it is fast.</li>
+      <li>{{#if h1.verdict=supported}}Heavy rain after handoff went with more late parcels, even after accounting for month and state.{{/if}}{{#if h1.verdict=no clear effect}}Heavy rain looks like a cause in the raw numbers, but the pattern disappears once month and state are taken into account.{{/if}}{{#if h1.verdict=opposite}}Heavy rain after handoff went with fewer late parcels once month and state were taken into account.{{/if}}</li>
+      <li>{{#if h2.verdict=supported}}A public holiday in the window went with more late parcels.{{/if}}{{#if h2.verdict=no clear effect}}A public holiday in the window made no clear difference.{{/if}}{{#if h2.verdict=opposite}}A public holiday in the window went with fewer late parcels, the opposite of our guess, and we did not test why.{{/if}}</li>
+      <li>A model can beat guessing but stays modest: an AUC of {{h3.auc_stage_3|2}} at best.</li>
+    </ol>
+    <h3>Check yourself</h3>
+    <div id="quiz">
+      <fieldset class="q" data-answer="h1">
+        <legend>Heavy rain: what did we find once month and state were accounted for?</legend>
+        <label><input type="radio" name="q1" value="supported"> Parcels were late more often</label>
+        <label><input type="radio" name="q1" value="no clear effect"> No clear effect</label>
+        <label><input type="radio" name="q1" value="opposite"> Parcels were late less often</label>
+      </fieldset>
+      <fieldset class="q" data-answer="h2">
+        <legend>Public holidays: what did we find about parcels with a holiday in their window?</legend>
+        <label><input type="radio" name="q2" value="supported"> They were late more often</label>
+        <label><input type="radio" name="q2" value="no clear effect"> No clear difference</label>
+        <label><input type="radio" name="q2" value="opposite"> They were late less often</label>
+      </fieldset>
+      <fieldset class="q" data-answer="model">
+        <legend>Which version of the model ranked late parcels best?</legend>
+        <label><input type="radio" name="q3" value="stage_1"> The one at purchase</label>
+        <label><input type="radio" name="q3" value="stage_2"> The one after shipping</label>
+        <label><input type="radio" name="q3" value="stage_3"> The one with weather and holidays</label>
+      </fieldset>
+      <button type="button" id="quiz-check">Check my answers</button>
+      <p id="quiz-result" aria-live="polite"></p>
+    </div>
+  </div>
+</section>
+
+<section id="s08">
+  <div class="wrap fade">
+    <div class="label">08</div>
+    <h2>From findings to Casama</h2>
+    <p>These are ideas for the parcel board, not features built in this project.</p>
+    <ol class="takeaways">
+      <li>Ask for the seller's handoff time when a parcel is added to the board, and warn housemates early when it is slow, since that is when parcels run late.</li>
+      <li>Treat any lateness warning as a nudge to plan who will be home, not as a promise, because the model is modest.</li>
+    </ol>
+    <div class="box">
+      <h3>Reuse in another country</h3>
+      <p>The holiday call used here works for any country by changing one code. Asked for {{reuse.country}} in {{reuse.year|raw}}, the Nager.Date API returned {{reuse.holiday_count}} public holidays, starting with {{reuse.first_five_text}}. Weather works the same way by changing the coordinates, so the pipeline can be repurposed for Philippine households.</p>
+    </div>
+  </div>
+</section>
+
+<section class="dark" id="s09">
+  <div class="wrap fade">
+    <div class="label">09</div>
+    <h2>What this does not prove</h2>
+    <ul class="plain">
+      <li>The data is Brazilian marketplace data, not Philippine, so it says nothing certain about Casama's households.</li>
+      <li>It holds timestamps only. There is no courier, payment type or cash on delivery amount.</li>
+      <li>Weather is one point per state ({{limits.weather_points}} capitals), and the seller's location is unknown, so weather is only measured at the destination.</li>
+      <li>These are associations, not causes. We did not test why parcels with a holiday in their window behaved as they did.</li>
+      <li>Parcels without a carrier handoff date ({{limits.window_features_missing}} of {{limits.analysed}}) are left out of the weather and model results.</li>
+      <li>The model is modest and should be treated as a nudge.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="s10">
+  <div class="wrap fade">
+    <div class="label">10</div>
+    <h2>Definitions, references and credits</h2>
+    <dl class="glossary">
+      <dt>Late parcel</dt><dd>A parcel delivered on a later calendar day than its estimated delivery date.</dd>
+      <dt>Estimated date</dt><dd>The delivery date promised to the customer at purchase.</dd>
+      <dt>Handoff</dt><dd>The moment the seller gives the parcel to the carrier.</dd>
+      <dt>Window</dt><dd>The {{h1.window_days}} calendar days starting on the handoff date, the same for every parcel.</dd>
+      <dt>Heavy rain day</dt><dd>A day with at least {{h1.heavy_mm|0}} mm of rain at the destination state capital.</dd>
+      <dt>Odds ratio</dt><dd>How much the odds of being late change. One means no change, above one means more often late, below one means less often.</dd>
+      <dt>Interval</dt><dd>A range the true value is likely to lie in, here ninety five percent. If the interval of an odds ratio spans one, the effect cannot be told apart from none.</dd>
+      <dt>AUC</dt><dd>How well a model ranks late parcels above on time ones.</dd>
+    </dl>
+    <h3>Sources</h3>
+    {{@sources}}
+    <p>The full list of libraries and references is in REFERENCES.md in the repository.</p>
+    <div class="credits">
+      <h3>Credits</h3>
+      <p>Group Theoraux: Theodore Von Joshua M. Bunquin, Christian B. Nayre, Daniel B. Villanueva, John C. Alcaraz and Paul C. Alcaraz.</p>
+    </div>
+  </div>
+</section>
+
+<footer>Built from findings.json and series.json. Group Theoraux, Data Science final project for Casama.</footer>
+
+<script id="findings" type="application/json">/*@findings*/</script>
+<script id="series" type="application/json">/*@series*/</script>
+<script>/*@js*/</script>
+</body>
+</html>

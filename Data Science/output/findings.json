@@ -1,0 +1,199 @@
+{
+  "data_note": {
+    "late_rule": "delivered on a later calendar day than the estimated date",
+    "late_parcels_timestamp_rule": 7519,
+    "late_pct_timestamp_rule": 7.853889863792094,
+    "clock_only_late": 1290,
+    "clock_only_share_pct": 17.156536773507113
+  },
+  "cleaning": {
+    "raw_orders": 99441,
+    "delivered_with_date": 96476,
+    "analysed": 95736,
+    "dropped": 740,
+    "undelivered": 2965,
+    "kept_pct": 96.2741726249736
+  },
+  "late": {
+    "rate_pct": 6.506434361159856,
+    "late_parcels": 6229,
+    "median_days_early": 11.949814814814815,
+    "worst_month": "2018-03",
+    "worst_month_late_pct": 18.532873959230546,
+    "best_month_late_pct": 1.0261502813637868,
+    "late_pct_shortest_promise": 10.435225248154746,
+    "late_pct_longest_promise": 4.431420933580094,
+    "volume_late_correlation": 0.5368216562587
+  },
+  "delivery_days": {
+    "median": 10.197094907407408,
+    "mean": 12.31212247949318,
+    "p90": 22.884178240740738,
+    "busiest_weekday": 1,
+    "busiest_hour": 14
+  },
+  "handoff": {
+    "late_pct_fast": 3.0880489864864864,
+    "late_pct_slow": 19.632219632219634,
+    "median_total_days_fast": 7.190028935185185,
+    "median_total_days_slow": 18.955445601851853,
+    "corr_handoff_late": 0.21521105373821559
+  },
+  "h1": {
+    "window_days": 7,
+    "heavy_mm": 10.0,
+    "parcels": 95735,
+    "dose": [
+      {
+        "group": "0",
+        "n": 60234,
+        "late_pct": 5.500215824949365,
+        "ci_low": 5.324193976823721,
+        "ci_high": 5.681218248829564,
+        "reliable": true
+      },
+      {
+        "group": "1",
+        "n": 20503,
+        "late_pct": 7.98907476954592,
+        "ci_low": 7.6281519777593525,
+        "ci_high": 8.345120226308344,
+        "reliable": true
+      },
+      {
+        "group": "2",
+        "n": 9236,
+        "late_pct": 8.401905586834127,
+        "ci_low": 7.849718492854049,
+        "ci_high": 9.029883066262451,
+        "reliable": true
+      },
+      {
+        "group": "3 or more",
+        "n": 5762,
+        "late_pct": 8.694897604998264,
+        "ci_low": 7.982905241235683,
+        "ci_high": 9.423811176674764,
+        "reliable": true
+      }
+    ],
+    "late_pct_no_heavy_rain": 5.500215824949365,
+    "late_pct_three_or_more": 8.694897604998264,
+    "adjusted_or": {
+      "odds_ratio": 1.0094941919462335,
+      "ci_low": 0.9548682732535384,
+      "ci_high": 1.067245139584391
+    },
+    "verdict": "no clear effect"
+  },
+  "h2": {
+    "window_days": 7,
+    "parcels_with_holiday": 13682,
+    "late_pct_with_holiday": 4.948107001900307,
+    "late_pct_without": 6.765139604889522,
+    "adjusted_or": {
+      "odds_ratio": 0.5456101153270494,
+      "ci_low": 0.44341614988161704,
+      "ci_high": 0.6713566883539839
+    },
+    "verdict": "opposite"
+  },
+  "h3": {
+    "auc_stage_1": 0.5517743694811785,
+    "auc_stage_2": 0.6251227905026473,
+    "auc_stage_3": 0.6606432037782153,
+    "diff": 0.035520413275567986,
+    "diff_ci_low": 0.0305506684805902,
+    "diff_ci_high": 0.04065308768894837,
+    "verdict": "improved",
+    "alert_precision_stage_2": 15.551013455970022,
+    "alert_recall_stage_2": 23.326520183955033,
+    "alert_precision_stage_3": 18.065724501958115,
+    "alert_recall_stage_3": 27.1078180889116,
+    "top_feature_stage_3": "handoff_days",
+    "top_added_feature": "rain_mm_total",
+    "top_added_importance": 0.07918391852216755,
+    "importance_stage_3": {
+      "estimated_days": 0.0371587427869627,
+      "purchase_weekday": 0.004030646349118516,
+      "purchase_hour": 0.0016180220841717885,
+      "month_of_year": -0.00898590389349252,
+      "handoff_days": 0.09059304888631196,
+      "heavy_rain_days": -0.00837175713896241,
+      "rain_mm_total": 0.07918391852216755,
+      "holiday_in_window": -0.006846340776168436
+    },
+    "model_rows": 95735,
+    "excluded_rows": 1,
+    "train_orders": 43285,
+    "test_orders": 52450,
+    "test_late_rate_pct": 7.46234509056244
+  },
+  "sensitivity": {
+    "10": {
+      "h1_or": {
+        "odds_ratio": 1.0130739468155083,
+        "ci_low": 0.9673320705738166,
+        "ci_high": 1.0609788023543396
+      },
+      "h2_or": {
+        "odds_ratio": 0.5428327314673829,
+        "ci_low": 0.42307134944912195,
+        "ci_high": 0.6964956968511907
+      },
+      "h3_diff": {
+        "diff": 0.06070367598859239,
+        "ci_low": 0.05501980565411849,
+        "ci_high": 0.06651786163079759
+      }
+    },
+    "14": {
+      "h1_or": {
+        "odds_ratio": 1.00270093301188,
+        "ci_low": 0.9644181204702221,
+        "ci_high": 1.042503391135669
+      },
+      "h2_or": {
+        "odds_ratio": 0.694988016286518,
+        "ci_low": 0.508719548598121,
+        "ci_high": 0.949458978159766
+      },
+      "h3_diff": {
+        "diff": 0.020065888963127554,
+        "ci_low": 0.014287937136616918,
+        "ci_high": 0.025555841578035515
+      }
+    }
+  },
+  "limits": {
+    "states": 27,
+    "weather_points": 27,
+    "analysed": 95736,
+    "window_features_missing": 1,
+    "min_group": 30,
+    "first_purchase_month": "2017-01",
+    "last_purchase_month": "2018-08"
+  },
+  "sources": [
+    {
+      "name": "Olist orders (Kaggle, zeynepustun)",
+      "url": "https://www.kaggle.com/datasets/zeynepustun/customer-order-delivery-dataset",
+      "accessed": "2026-11-24"
+    },
+    {
+      "name": "Olist customers (Kaggle, olistbr)",
+      "url": "https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce",
+      "accessed": "2026-11-24"
+    },
+    {
+      "name": "Open-Meteo Historical Weather API",
+      "url": "https://open-meteo.com/en/docs/historical-weather-api",
+      "accessed": "2026-11-24"
+    },
+    {
+      "name": "Nager.Date public holidays API",
+      "url": "https://date.nager.at/Api",
+      "accessed": "2026-11-24"
+    }
+  ]
+}

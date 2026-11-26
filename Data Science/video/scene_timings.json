@@ -1,0 +1,90 @@
+[
+  {
+    "id": "title",
+    "file": "audio/title.mp3",
+    "audio_seconds": 19.97,
+    "lead_seconds": 0.6,
+    "seconds": 22.07,
+    "estimated": false
+  },
+  {
+    "id": "question",
+    "file": "audio/question.mp3",
+    "audio_seconds": 41.84,
+    "lead_seconds": 0.6,
+    "seconds": 43.94,
+    "estimated": false
+  },
+  {
+    "id": "data",
+    "file": "audio/data.mp3",
+    "audio_seconds": 54.71,
+    "lead_seconds": 0.6,
+    "seconds": 56.81,
+    "estimated": false
+  },
+  {
+    "id": "cleaning",
+    "file": "audio/cleaning.mp3",
+    "audio_seconds": 41.1,
+    "lead_seconds": 0.6,
+    "seconds": 43.2,
+    "estimated": false
+  },
+  {
+    "id": "shows",
+    "file": "audio/shows.mp3",
+    "audio_seconds": 52.99,
+    "lead_seconds": 0.6,
+    "seconds": 55.09,
+    "estimated": false
+  },
+  {
+    "id": "weather",
+    "file": "audio/weather.mp3",
+    "audio_seconds": 65.99,
+    "lead_seconds": 0.6,
+    "seconds": 68.09,
+    "estimated": false
+  },
+  {
+    "id": "model",
+    "file": "audio/model.mp3",
+    "audio_seconds": 67.2,
+    "lead_seconds": 0.6,
+    "seconds": 69.3,
+    "estimated": false
+  },
+  {
+    "id": "takeaways",
+    "file": "audio/takeaways.mp3",
+    "audio_seconds": 35.81,
+    "lead_seconds": 0.6,
+    "seconds": 37.91,
+    "estimated": false
+  },
+  {
+    "id": "casama",
+    "file": "audio/casama.mp3",
+    "audio_seconds": 32.04,
+    "lead_seconds": 0.6,
+    "seconds": 34.14,
+    "estimated": false
+  },
+  {
+    "id": "limits",
+    "file": "audio/limits.mp3",
+    "audio_seconds": 33.16,
+    "lead_seconds": 0.6,
+    "seconds": 35.26,
+    "estimated": false
+  },
+  {
+    "id": "credits",
+    "file": "audio/credits.mp3",
+    "audio_seconds": 15.84,
+    "lead_seconds": 0.6,
+    "seconds": 23.94,
+    "estimated": false
+  }
+]

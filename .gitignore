@@ -1,4 +1,4 @@
-# Miscellaneous
+﻿# Miscellaneous
 *.class
 *.log
 *.pyc
@@ -51,7 +51,28 @@ app.*.map.json
 # Widget Preview related
 .widget_preview/
 
-# Data science analysis
-/data/
+# Data science and AI projects
+/Data Science/data/raw/
 __pycache__/
-analysis/output/late_model.joblib
+.pytest_cache/
+*.mp4
+node_modules/
+/Data Science/video/audio/
+/Data Science/video/remotion/out/
+/Data Science/video/remotion/public/data/
+/Data Science/video/remotion/public/fonts/
+/Data Science/video/remotion/public/audio/
+/AI/data/raw/
+/AI/data/hourly/
+/AI/video/hyperframes/.hyperframes/
+/AI/video/sfx.wav
+/AI/video/sound.m4a
+/AI/video/sfx-cues.json
+/AI/video/hyperframes/assets/sound.m4a
+/AI/video/audio/
+/AI/video/audio_local/
+/AI/video/models/
+/AI/video/hyperframes/out/
+/AI/video/hyperframes/node_modules/
+# the finished AI video is part of the submission
+!/AI/video/theoraux-ai-home-forecast.mp4
