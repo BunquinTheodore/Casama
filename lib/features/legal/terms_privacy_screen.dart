@@ -135,6 +135,13 @@ class _TermsPrivacyScreenState extends State<TermsPrivacyScreen>
         ),
         const SizedBox(height: CasamaSpacing.md),
         _buildSectionCard(
+          icon: Icons.insights_outlined,
+          title: 'Optional Routine Forecast',
+          badge: 'Off for new accounts',
+          content: 'If you turn on "Let Cas learn my routine" in Settings, Casama uses only the Home and Out taps you already make to estimate when you are usually home. The estimate is computed on your device and shown to your housemates only as a probability for one hour with a short reason, never as a full schedule. Turning it off deletes what Cas learned. The Casa 204 demo household starts with it switched on for its four demo housemates.',
+        ),
+        const SizedBox(height: CasamaSpacing.md),
+        _buildSectionCard(
           icon: Icons.shield_outlined,
           title: 'Household Data Isolation (RLS)',
           content: 'Your household conversations, delivery logs, tasks, and item postings are isolated using Row Level Security (RLS). Only approved members of your household code can view your home data.',

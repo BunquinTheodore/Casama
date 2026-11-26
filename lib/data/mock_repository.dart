@@ -2,10 +2,19 @@ import 'dart:math';
 
 import 'package:flutter/foundation.dart';
 
+import '../features/parcels/home_forecast/arrival_advisor.dart';
+import '../features/parcels/home_forecast/demo_presence_seed.dart';
+import '../features/parcels/home_forecast/habit_profile.dart';
+import '../features/parcels/home_forecast/presence_hours.dart';
 import 'models.dart';
 
 /// Pre-populated InMemory / Demo Repository matching Casama Mockup Ui.png
 class MockRepository extends ChangeNotifier {
+  /// [clock] is only for tests of the Home Forecast, which needs a known "now".
+  MockRepository({DateTime Function()? clock}) : _clock = clock ?? DateTime.now {
+    _seedDemoPresence();
+  }
+
   bool _isAuthenticated = true;
   bool get isAuthenticated => _isAuthenticated;
 
@@ -516,7 +525,84 @@ class MockRepository extends ChangeNotifier {
         note: note ?? _members[index].note,
         updatedAt: DateTime.now(),
       );
+      _recordPresenceTap(isHome);
       notifyListeners();
+    }
+  }
+
+  // ==========================================
+  // Home Forecast (AI project): opt in, taps and demo history
+  // ==========================================
+
+  final DateTime Function() _clock;
+
+  /// Who turned "Let Cas learn my routine" on. Anyone not listed is off.
+  final Map<String, bool> _routineOptIn = {};
+
+  /// The Home and Out taps recorded since the member opted in.
+  final Map<String, List<PresenceEvent>> _presenceTaps = {};
+
+  /// Demo filler hours (derived from public occupancy data, not real housemates).
+  final Map<String, List<HourObservation>> _demoHours = {};
+
+  /// The clock the Home Forecast history is recorded with (tests can inject their own).
+  DateTime get now => _clock();
+
+  bool isRoutineOptedIn(String userId) => _routineOptIn[userId] ?? false;
+
+  /// Turning it off deletes everything stored for that member.
+  void setRoutineOptIn(String userId, bool value) {
+    if (isRoutineOptedIn(userId) == value) return;
+    _routineOptIn[userId] = value;
+    if (!value) {
+      _presenceTaps.remove(userId);
+      _demoHours.remove(userId);
+    }
+    notifyListeners();
+  }
+
+  /// The Home and Out taps recorded for [userId] (empty unless opted in).
+  List<PresenceEvent> presenceHistoryFor(String userId) =>
+      List.unmodifiable(_presenceTaps[userId] ?? const <PresenceEvent>[]);
+
+  /// What the forecaster may use. A member who is not opted in contributes no hours.
+  List<MemberHistory> forecastInputs(DateTime now) => [
+    for (final m in _members)
+      MemberHistory(
+        memberId: m.profile.id,
+        name: m.profile.displayName,
+        optedIn: isRoutineOptedIn(m.profile.id),
+        homeNow: m.isHome,
+        hours: isRoutineOptedIn(m.profile.id)
+            ? [
+                ...?_demoHours[m.profile.id],
+                ...eventsToHourly(_presenceTaps[m.profile.id] ?? const [], now),
+              ]
+            : const [],
+      ),
+  ];
+
+  void _recordPresenceTap(bool isHome) {
+    final id = _currentUser.id;
+    if (!isRoutineOptedIn(id)) return;
+    (_presenceTaps[id] ??= []).add(PresenceEvent(userId: id, at: _clock(), isHome: isHome));
+  }
+
+  /// The seeded demo household has all four housemates opted in (their consent is demo state).
+  /// Three whole Monday to Sunday weeks that end at the most recent Monday 00:00.
+  void _seedDemoPresence() {
+    final seeded = demoPresenceSeedJson['members'] as Map<String, dynamic>;
+    final now = _clock();
+    final mostRecentMonday = DateTime.utc(now.year, now.month, now.day).subtract(Duration(days: now.weekday - 1));
+    for (var i = 0; i < _members.length; i++) {
+      final text = seeded['m$i'] as String?;
+      if (text == null) continue;
+      final id = _members[i].profile.id;
+      final start = mostRecentMonday.subtract(Duration(hours: text.length));
+      _demoHours[id] = [
+        for (var h = 0; h < text.length; h++) HourObservation(start.add(Duration(hours: h)), text[h] == '1'),
+      ];
+      _routineOptIn[id] = true;
     }
   }
 

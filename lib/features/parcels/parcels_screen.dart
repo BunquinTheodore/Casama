@@ -9,6 +9,7 @@ import '../../data/repository_provider.dart';
 import '../../shared/widgets/cas_mascot_view.dart';
 import '../../shared/widgets/casama_button.dart';
 import '../../shared/widgets/status_chip.dart';
+import 'home_forecast/forecast_row.dart';
 
 class ParcelsScreen extends ConsumerStatefulWidget {
   final bool initialOpenAddModal;
@@ -236,6 +237,16 @@ class _ParcelsScreenState extends ConsumerState<ParcelsScreen>
                         ),
                       ],
                     ),
+                    ForecastRow(
+                      compact: true,
+                      expectedArrival: DateTime(
+                        selectedDate.year,
+                        selectedDate.month,
+                        selectedDate.day,
+                        selectedTime.hour,
+                        selectedTime.minute,
+                      ),
+                    ),
                     const SizedBox(height: 14),
 
                     // Payment Type
@@ -446,6 +457,10 @@ class _ParcelCard extends ConsumerWidget {
               style: TextStyle(fontSize: 13, color: context.textSecondaryColor),
             ),
           ],
+
+          // Home Forecast: advice only, never changes who is marked available.
+          if (!isHistory && parcel.status == ParcelStatus.expected)
+            ForecastRow(expectedArrival: parcel.expectedArrival),
 
           const SizedBox(height: 14),
           Divider(height: 1, color: context.borderColor),
