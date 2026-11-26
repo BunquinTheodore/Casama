@@ -1,0 +1,82 @@
+[
+  {
+    "id": "title",
+    "file": "audio_local/title.mp3",
+    "audio_seconds": 26.46,
+    "lead_seconds": 0.6,
+    "seconds": 28.56,
+    "estimated": false
+  },
+  {
+    "id": "problem",
+    "file": "audio_local/problem.mp3",
+    "audio_seconds": 33.85,
+    "lead_seconds": 0.6,
+    "seconds": 35.95,
+    "estimated": false
+  },
+  {
+    "id": "idea",
+    "file": "audio_local/idea.mp3",
+    "audio_seconds": 53.24,
+    "lead_seconds": 0.6,
+    "seconds": 55.34,
+    "estimated": false
+  },
+  {
+    "id": "data",
+    "file": "audio_local/data.mp3",
+    "audio_seconds": 66.04,
+    "lead_seconds": 0.6,
+    "seconds": 68.14,
+    "estimated": false
+  },
+  {
+    "id": "algorithm",
+    "file": "audio_local/algorithm.mp3",
+    "audio_seconds": 67.34,
+    "lead_seconds": 0.6,
+    "seconds": 69.44,
+    "estimated": false
+  },
+  {
+    "id": "results",
+    "file": "audio_local/results.mp3",
+    "audio_seconds": 85.5,
+    "lead_seconds": 0.6,
+    "seconds": 87.6,
+    "estimated": false
+  },
+  {
+    "id": "app",
+    "file": "audio_local/app.mp3",
+    "audio_seconds": 61.23,
+    "lead_seconds": 0.6,
+    "seconds": 63.33,
+    "estimated": false
+  },
+  {
+    "id": "privacy",
+    "file": "audio_local/privacy.mp3",
+    "audio_seconds": 39.71,
+    "lead_seconds": 0.6,
+    "seconds": 41.81,
+    "estimated": false
+  },
+  {
+    "id": "limits",
+    "file": "audio_local/limits.mp3",
+    "audio_seconds": 41.46,
+    "lead_seconds": 0.6,
+    "seconds": 43.56,
+    "estimated": false
+  },
+  {
+    "id": "credits",
+    "file": "audio_local/credits.mp3",
+    "audio_seconds": 32.78,
+    "lead_seconds": 0.6,
+    "seconds": 40.88,
+    "estimated": false
+  }
+]

@@ -1,0 +1,85 @@
+{
+  "title": {
+    "name": {"phrase": "Casama Home Forecast", "sfx": "pop"},
+    "group": {"phrase": "group Theoraux", "sfx": "pop"},
+    "skill": {"phrase": "who is probably home", "sfx": "tick"},
+    "honest": {"phrase": "the parts that did not work", "sfx": "thud"}
+  },
+  "problem": {
+    "board": {"phrase": "parcel board", "sfx": "swish"},
+    "taps": {"phrase": "taps available", "sfx": "pop"},
+    "warning": {"phrase": "after everyone has tapped unavailable", "sfx": "thud"},
+    "question": {"phrase": "who is likely to be home", "sfx": "pop"},
+    "window": {"phrase": "which window is the safest", "sfx": "pop"}
+  },
+  "idea": {
+    "forecast": {"phrase": "A forecast is a probability", "sfx": "tick"},
+    "slots": {"phrase": "168 slots", "sfx": "pop"},
+    "alex": {"phrase": "Alex was home on the last three Thursdays", "sfx": "tick"},
+    "recent": {"phrase": "Recent weeks count more", "sfx": "swish"},
+    "habit": {"phrase": "called the habit", "sfx": "pop"}
+  },
+  "data": {
+    "casas": {"phrase": "CASAS smart home dataset", "sfx": "pop"},
+    "labels": {"phrase": "leave home and come back", "sfx": "tick"},
+    "three": {"phrase": "of the five homes have both labels", "sfx": "pop"},
+    "left": {"phrase": "Cairo and Milan only record leaving", "sfx": "swish"},
+    "gate": {"phrase": "at least two homes", "sfx": "thud"},
+    "few": {"phrase": "Three homes is very few", "sfx": "thud"},
+    "notfil": {"phrase": "none of them is Filipino", "sfx": "tick"}
+  },
+  "algorithm": {
+    "s1": {"phrase": "Step one, the habit", "sfx": "pop"},
+    "decay": {"phrase": "an old observation counts for less", "sfx": "swish"},
+    "half": {"phrase": "half as much as one from today", "sfx": "tick"},
+    "s2": {"phrase": "Step two, the present", "sfx": "pop"},
+    "fade": {"phrase": "fades with a time constant", "sfx": "swish"},
+    "s3": {"phrase": "Step three, combine", "sfx": "rise"},
+    "weights": {"phrase": "The habit carries the most weight", "sfx": "tick"},
+    "whole": {"phrase": "That is the whole model", "sfx": "thud"},
+    "flat": {"phrase": "starts at fifty percent", "sfx": "pop"}
+  },
+  "results": {
+    "test": {"phrase": "leaving one home out at a time", "sfx": "tick"},
+    "score": {"phrase": "the model's error score", "sfx": "pop"},
+    "base": {"phrase": "The plain average for that hour of the week", "sfx": "pop"},
+    "lower": {"phrase": "Lower is better", "sfx": "tick"},
+    "wins": {"phrase": "wins on error at every horizon", "sfx": "thud"},
+    "rank": {"phrase": "the plain average ranks hours slightly better", "sfx": "swish"},
+    "weeks": {"phrase": "about two weeks of history", "sfx": "pop"},
+    "gbm": {"phrase": "gradient boosting", "sfx": "pop"},
+    "failed": {"phrase": "one idea failed", "sfx": "thud"}
+  },
+  "app": {
+    "real": {"phrase": "the real Casama app", "sfx": "pop"},
+    "card": {"phrase": "Cas thinks Ria is probably home", "sfx": "pop"},
+    "reason": {"phrase": "Ria was home on three of the last three Wednesdays", "sfx": "tick"},
+    "atleast": {"phrase": "at least one housemate is home", "sfx": "pop"},
+    "window": {"phrase": "best two hour window", "sfx": "swish"},
+    "dart": {"phrase": "a small Dart module in the app", "sfx": "pop"},
+    "parity": {"phrase": "nine decimal places", "sfx": "thud"},
+    "advice": {"phrase": "It never changes who is marked available", "sfx": "thud"}
+  },
+  "privacy": {
+    "sensitive": {"phrase": "tells someone when a home is empty", "sfx": "thud"},
+    "off": {"phrase": "off by default for every member", "sfx": "pop"},
+    "taps": {"phrase": "only from the home and out taps", "sfx": "tick"},
+    "device": {"phrase": "It runs on the device", "sfx": "pop"},
+    "deletes": {"phrase": "Turning it off deletes what Cas learned", "sfx": "swish"},
+    "demo": {"phrase": "pre opted in", "sfx": "tick"}
+  },
+  "limits": {
+    "over": {"phrase": "It is overconfident when it says away", "sfx": "thud"},
+    "indep": {"phrase": "assumes housemates are independent", "sfx": "pop"},
+    "untested": {"phrase": "not tested separately", "sfx": "tick"},
+    "reset": {"phrase": "resets when the app restarts", "sfx": "swish"},
+    "filipino": {"phrase": "real Filipino housemates", "sfx": "thud"}
+  },
+  "credits": {
+    "group": {"phrase": "group Theoraux", "sfx": "pop"},
+    "casas": {"phrase": "the CASAS smart home dataset", "sfx": "tick"},
+    "licence": {"phrase": "CC BY 4.0", "sfx": "pop"},
+    "refs": {"phrase": "the references file", "sfx": "pop"},
+    "thanks": {"phrase": "Thank you for watching", "sfx": "swish"}
+  }
+}

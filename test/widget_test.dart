@@ -1246,8 +1246,8 @@ void main() {
       final switches = find.byType(Switch);
       expect(
         switches,
-        findsNWidgets(5),
-      ); // 4 notification switches + 1 privacy switch
+        findsNWidgets(6),
+      ); // 4 notification switches + 1 privacy switch + 1 routine forecast switch
 
       await tester.tap(switches.at(1)); // Parcel switch
       await tester.pumpAndSettle();

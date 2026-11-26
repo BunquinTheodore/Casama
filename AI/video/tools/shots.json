@@ -1,0 +1,61 @@
+[
+ {
+  "name": "parcels-mobile",
+  "hash": "/parcels",
+  "width": 390,
+  "height": 844,
+  "dpr": 2,
+  "waitMs": 8000
+ },
+ {
+  "name": "parcels-add-sheet",
+  "hash": "/parcels?openAdd=true",
+  "width": 390,
+  "height": 844,
+  "dpr": 2,
+  "waitMs": 8000
+ },
+ {
+  "name": "settings-top",
+  "hash": "/settings",
+  "width": 390,
+  "height": 844,
+  "dpr": 2,
+  "waitMs": 8000
+ },
+ {
+  "name": "settings-switch",
+  "hash": "/settings",
+  "width": 390,
+  "height": 844,
+  "dpr": 2,
+  "waitMs": 8000,
+  "steps": [
+   {
+    "scroll": [
+     195,
+     500,
+     1500
+    ],
+    "wait": 2000
+   }
+  ]
+ },
+ {
+  "name": "privacy-tab",
+  "hash": "/terms",
+  "width": 390,
+  "height": 844,
+  "dpr": 2,
+  "waitMs": 8000,
+  "steps": [
+   {
+    "click": [
+     195,
+     79
+    ],
+    "wait": 2500
+   }
+  ]
+ }
+]

@@ -423,6 +423,33 @@ class _AppSettingsScreenState extends ConsumerState<AppSettingsScreen> {
                     endIndent: 16,
                     color: borderColor,
                   ),
+                  SwitchListTile(
+                    title: Text(
+                      'Let Cas learn my routine',
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                        color: textColor,
+                      ),
+                    ),
+                    subtitle: const Text(
+                      'Uses only your Home and Out taps to forecast when you are home for parcels. Stays on this device. Turning it off deletes what Cas learned.',
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: CasamaColors.textSecondary,
+                      ),
+                    ),
+                    value: repo.isRoutineOptedIn(repo.currentUser.id),
+                    activeTrackColor: CasamaColors.primaryCoral,
+                    onChanged: (v) =>
+                        repo.setRoutineOptIn(repo.currentUser.id, v),
+                  ),
+                  Divider(
+                    height: 1,
+                    indent: 16,
+                    endIndent: 16,
+                    color: borderColor,
+                  ),
                   ListTile(
                     leading: const Icon(
                       Icons.perm_device_information_outlined,

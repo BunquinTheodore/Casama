@@ -1,0 +1,94 @@
+<template>
+  <style>
+
+@font-face{font-family:'Josefin Sans';font-weight:300;src:url('assets/fonts/JosefinSans.woff2') format('woff2');}
+@font-face{font-family:'Manrope';font-weight:500;src:url('assets/fonts/Manrope.woff2') format('woff2');}
+#root{position:absolute;inset:0;background:#FFF8F1;color:#1B2A4A;font-family:'Manrope',sans-serif;font-weight:500;overflow:hidden}
+#root *{box-sizing:border-box}
+.abs{position:absolute}
+.layer{position:absolute;left:0;top:0;width:1920px;height:1080px}
+.h1{font-family:'Josefin Sans',sans-serif;font-weight:300;text-transform:uppercase;letter-spacing:.06em;line-height:1.06;font-size:112px;white-space:nowrap}
+.h2{font-family:'Josefin Sans',sans-serif;font-weight:300;text-transform:uppercase;letter-spacing:.06em;line-height:1.1;font-size:68px}
+.num{font-family:'Montserrat',sans-serif;font-weight:800;letter-spacing:-.02em;line-height:1}
+.coral{color:#C0503F}
+.body{font-size:36px;line-height:1.35}
+.small{font-size:30px;line-height:1.3}
+.panel{position:absolute;background:#fff;border:2px solid #1B2A4A;border-radius:28px;box-shadow:10px 10px 0 rgba(27,42,74,.12)}
+.ink{background:#1B2A4A;color:#FFF8F1}
+.stamp{position:absolute;border:5px solid #E8776A;color:#C0503F;border-radius:14px;padding:10px 28px;font-family:'Montserrat',sans-serif;font-weight:800;font-size:40px;letter-spacing:.05em;text-transform:uppercase;white-space:nowrap;background:#FFF8F1}
+.stamp.ink{border-color:#1B2A4A;color:#1B2A4A}
+.phone{position:absolute;border:10px solid #1B2A4A;border-radius:46px;overflow:hidden;background:#FFF8F1;box-shadow:10px 10px 0 rgba(27,42,74,.12)}
+.phone img{display:block;width:100%}
+.wipe{position:absolute;left:0;top:0;width:1920px;height:1080px;background:#E8776A}
+.rule{position:absolute;height:2px;background:#1B2A4A}
+.row{position:absolute;display:flex;align-items:center;font-size:36px}
+.tag{font-family:'Montserrat',sans-serif;font-weight:800;font-size:28px;letter-spacing:.06em;text-transform:uppercase}
+
+
+  </style>
+  <div id="root" data-composition-id="algorithm" data-width="1920" data-height="1080">
+<div class="layer" id="algorithm-stage">
+
+    <div class="rule" style="left:96px;top:392px;width:1728px"></div>
+    <div class="rule" style="left:96px;top:692px;width:1728px"></div>
+    <div class="abs" id="algorithm-t1" style="left:96px;top:110px;width:440px"><div class="tag coral">Step one</div><div class="h2" style="font-size:54px;white-space:nowrap">The habit</div><div class="small" style="margin-top:14px">how often each hour of the week was home</div></div>
+    <svg class="abs" id="algorithm-c1" style="left:560px;top:110px" width="620" height="250" viewBox="-30 -10 620 250"><line x1="0" y1="190" x2="560" y2="190" stroke="#1B2A4A" stroke-width="3"/><line x1="0" y1="0" x2="0" y2="190" stroke="#1B2A4A" stroke-width="3"/><path id="algorithm-c1-p" d="M0.0,0.0 L14.0,6.5 L28.0,12.7 L42.0,18.8 L56.0,24.6 L70.0,30.2 L84.0,35.7 L98.0,40.9 L112.0,46.0 L126.0,50.9 L140.0,55.6 L154.0,60.2 L168.0,64.6 L182.0,68.9 L196.0,73.0 L210.0,77.0 L224.0,80.9 L238.0,84.6 L252.0,88.2 L266.0,91.6 L280.0,95.0 L294.0,98.2 L308.0,101.4 L322.0,104.4 L336.0,107.3 L350.0,110.1 L364.0,112.8 L378.0,115.5 L392.0,118.0 L406.0,120.5 L420.0,122.8 L434.0,125.1 L448.0,127.3 L462.0,129.5 L476.0,131.5 L490.0,133.5 L504.0,135.4 L518.0,137.3 L532.0,139.1 L546.0,140.8 L560.0,142.5" fill="none" stroke="#E8776A" stroke-width="8" stroke-linecap="butt" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/><text x="560" y="232" text-anchor="end" font-size="28" fill="#1B2A4A" font-family="Manrope">days ago, 0 to 28</text><text x="8" y="26" font-size="28" fill="#1B2A4A" font-family="Manrope">weight</text></svg>
+    <div class="abs" id="algorithm-half" style="left:870px;top:104px;width:3px;height:200px;background:#1B2A4A;opacity:.5"></div>
+    <div class="abs tag" id="algorithm-halfl" style="left:884px;top:118px;white-space:nowrap">half weight at 14 days</div>
+    <div class="abs" id="algorithm-halfn" style="left:1400px;top:120px;width:420px"><div class="num coral" style="font-size:110px">14</div><div class="small">days: an older reading counts half</div></div>
+    <div class="abs" id="algorithm-t2" style="left:96px;top:420px;width:440px"><div class="tag coral">Step two</div><div class="h2" style="font-size:54px;white-space:nowrap">The present</div><div class="small" style="margin-top:14px">home or out right now</div></div>
+    <svg class="abs" id="algorithm-c2" style="left:560px;top:410px" width="620" height="250" viewBox="-30 -10 620 250"><line x1="0" y1="190" x2="560" y2="190" stroke="#1B2A4A" stroke-width="3"/><line x1="0" y1="0" x2="0" y2="190" stroke="#1B2A4A" stroke-width="3"/><path id="algorithm-c2-p" d="M0.0,0.0 L14.0,9.3 L28.0,18.1 L42.0,26.5 L56.0,34.4 L70.0,42.0 L84.0,49.2 L98.0,56.1 L112.0,62.6 L126.0,68.9 L140.0,74.8 L154.0,80.4 L168.0,85.7 L182.0,90.8 L196.0,95.6 L210.0,100.3 L224.0,104.6 L238.0,108.8 L252.0,112.8 L266.0,116.5 L280.0,120.1 L294.0,123.5 L308.0,126.8 L322.0,129.8 L336.0,132.8 L350.0,135.6 L364.0,138.2 L378.0,140.7 L392.0,143.1 L406.0,145.4 L420.0,147.6 L434.0,149.7 L448.0,151.6 L462.0,153.5 L476.0,155.3 L490.0,157.0 L504.0,158.6 L518.0,160.1 L532.0,161.6 L546.0,163.0 L560.0,164.3" fill="none" stroke="#E8776A" stroke-width="8" stroke-linecap="butt" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/><text x="560" y="232" text-anchor="end" font-size="28" fill="#1B2A4A" font-family="Manrope">hours ahead, 0 to 24</text><text x="8" y="26" font-size="28" fill="#1B2A4A" font-family="Manrope">effect</text></svg>
+    <div class="abs" id="algorithm-taul" style="left:1400px;top:420px;width:420px"><div class="num coral" style="font-size:110px">12</div><div class="small">hours: how long the present lasts</div></div>
+    <div class="abs" id="algorithm-t3" style="left:96px;top:722px;width:440px"><div class="tag coral">Step three</div><div class="h2" style="font-size:54px;white-space:nowrap">Combine</div></div>
+    <div class="panel ink" id="algorithm-formula" style="left:560px;top:722px;width:1264px;height:150px;padding:22px 36px;font-family:Montserrat,sans-serif;font-weight:800;font-size:32px;line-height:1.4">forecast = sigmoid( b0 + b1 x logit(habit)<br>+ b2 x (2n - 1) x e^(-h / tau) )</div>
+    <div class="abs" id="algorithm-b0" style="left:560px;top:900px;width:230px"><div class="num coral" style="font-size:60px" id="algorithm-b0n">0</div><div class="small">b0, the base</div></div>
+    <div class="abs" id="algorithm-b1" style="left:810px;top:900px;width:230px"><div class="num coral" style="font-size:60px" id="algorithm-b1n">0</div><div class="small">b1, the habit</div></div>
+    <div class="abs" id="algorithm-b2" style="left:1060px;top:900px;width:240px"><div class="num coral" style="font-size:60px" id="algorithm-b2n">0</div><div class="small">b2, the present</div></div>
+    <div class="stamp" id="algorithm-whole" style="left:1330px;top:905px">The whole model</div>
+    <div class="abs" id="algorithm-flat" style="left:96px;top:880px;width:440px"><div class="tag" style="white-space:nowrap">New person starts at</div><div class="num coral" style="font-size:52px">50%</div></div>
+    </div>
+    <div class="abs" data-layout-ignore style="left:96px;top:1040px;width:1728px;height:6px;background:rgba(27,42,74,.12);border-radius:3px"></div>
+    <div class="abs" data-layout-ignore id="algorithm-prog" style="left:96px;top:1040px;width:1728px;height:6px;background:#E8776A;border-radius:3px"></div>
+    <div class="wipe" data-layout-allow-overflow id="algorithm-wipe"></div>
+  </div>
+  <script>
+    const B = {"s1": 3.481, "decay": 9.878, "half": 17.025, "s2": 19.459, "fade": 27.707, "s3": 30.69, "weights": 39.077, "whole": 45.362, "flat": 63.799};
+
+const tl = gsap.timeline({paused:true});
+const rise = (sel, t, d = 0.5, y = 28) => tl.fromTo(sel, {opacity:0, y:y}, {opacity:1, y:0, duration:d, ease:'power3.out'}, t);
+const fade = (sel, t, d = 0.4) => tl.fromTo(sel, {opacity:0}, {opacity:1, duration:d, ease:'power1.out'}, t);
+const hide = (sel, t, d = 0.35) => tl.to(sel, {opacity:0, duration:d, ease:'power1.in'}, t);
+const stamp = (sel, t, rot = -3) => tl.fromTo(sel, {opacity:0, scale:1.6, rotation:rot * 2.5}, {opacity:1, scale:1, rotation:rot, duration:0.35, ease:'back.out(2)'}, t);
+const growY = (sel, t, d = 0.8) => tl.fromTo(sel, {scaleY:0, transformOrigin:'50% 100%'}, {scaleY:1, transformOrigin:'50% 100%', duration:d, ease:'power2.out'}, t);
+const growX = (sel, t, d = 0.8) => tl.fromTo(sel, {scaleX:0, transformOrigin:'0% 50%'}, {scaleX:1, transformOrigin:'0% 50%', duration:d, ease:'power2.out'}, t);
+const draw = (sel, t, d = 1.0) => tl.fromTo(sel, {strokeDashoffset:1}, {strokeDashoffset:0, duration:d, ease:'power1.inOut'}, t);
+const count = (sel, t, to, dec = 2, d = 0.9) => { const o = {v:0}; tl.to(o, {v:to, duration:d, ease:'power2.out', onUpdate(){ document.querySelector(sel).textContent = o.v.toFixed(dec); }}, t); };
+const wipe = (sel) => tl.fromTo(sel, {xPercent:0}, {xPercent:101, duration:0.55, ease:'power3.inOut'}, 0);
+
+    wipe('#algorithm-wipe');
+    tl.fromTo('#algorithm-stage', {scale:1, transformOrigin:'35% 45%'}, {scale:1.035, transformOrigin:'35% 45%', duration:68.67, ease:'none'}, 0.19999999999999996);
+    tl.fromTo('#algorithm-prog', {scaleX:0, transformOrigin:'0% 50%'}, {scaleX:1, transformOrigin:'0% 50%', duration:67.67, ease:'none'}, 0.6);
+
+    rise('#algorithm-t1', B.s1, 0.5);
+    fade('#algorithm-c1', B.s1 + 0.2, 0.4);
+    draw('#algorithm-c1-p', B.decay, 1.4);
+    growY('#algorithm-half', B.half, 0.5);
+    rise('#algorithm-halfl', B.half + 0.2, 0.4, 12);
+    rise('#algorithm-halfn', B.half + 0.3, 0.5, 20);
+    rise('#algorithm-t2', B.s2, 0.5);
+    fade('#algorithm-c2', B.s2 + 0.2, 0.4);
+    draw('#algorithm-c2-p', B.fade, 1.4);
+    rise('#algorithm-taul', B.fade + 0.8, 0.4, 12);
+    rise('#algorithm-t3', B.s3, 0.5);
+    rise('#algorithm-formula', B.s3 + 0.3, 0.6, 30);
+    rise('#algorithm-b0', B.weights, 0.4, 20);
+    rise('#algorithm-b1', B.weights + 0.25, 0.4, 20);
+    rise('#algorithm-b2', B.weights + 0.5, 0.4, 20);
+    count('#algorithm-b0n', B.weights, 0.267272, 2);
+    count('#algorithm-b1n', B.weights + 0.25, 1.291537, 2);
+    count('#algorithm-b2n', B.weights + 0.5, 1.363076, 2);
+    stamp('#algorithm-whole', B.whole, -3);
+    rise('#algorithm-flat', B.flat, 0.5);
+    window.__timelines["algorithm"] = tl;
+  </script>
+</template>

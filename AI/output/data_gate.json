@@ -1,0 +1,49 @@
+{
+ "passed": true,
+ "min_days": 42,
+ "min_coverage": 0.7,
+ "min_homes": 2,
+ "usable_homes": 3,
+ "homes": [
+  {
+   "id": "aruba",
+   "days": 219,
+   "hours": 5267,
+   "first_hour": "2010-11-04T12:00",
+   "last_hour": "2011-06-11T22:00",
+   "home_share": 0.8632997911524587,
+   "coverage": 1.0,
+   "usable": true
+  },
+  {
+   "id": "tulum1",
+   "days": 120,
+   "hours": 2895,
+   "first_hour": "2009-04-02T08:00",
+   "last_hour": "2009-07-31T22:00",
+   "home_share": 0.677720207253886,
+   "coverage": 1.0,
+   "usable": true
+  },
+  {
+   "id": "tulum2",
+   "days": 183,
+   "hours": 4415,
+   "first_hour": "2009-09-25T18:00",
+   "last_hour": "2010-03-28T16:00",
+   "home_share": 0.8534541336353341,
+   "coverage": 1.0,
+   "usable": true
+  },
+  {
+   "id": "cairo",
+   "usable": false,
+   "reason": "cairo.txt has no Enter_Home labels, so the time of return is unknown"
+  },
+  {
+   "id": "milan",
+   "usable": false,
+   "reason": "milan.txt has no Enter_Home labels, so the time of return is unknown"
+  }
+ ]
+}

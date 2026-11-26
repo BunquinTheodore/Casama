@@ -1,0 +1,46 @@
+[
+  {
+    "id": "title",
+    "text": "Parcels arrive when nobody is in. This is our Data Science final project, built for Casama, a household coordination app for people who share a home. We looked at 95,736 real parcels, added weather and public holidays from two free public APIs, and asked one simple question: when do deliveries run late?"
+  },
+  {
+    "id": "question",
+    "text": "Casama's parcel board helps housemates sort out who receives a delivery. A late parcel is a parcel that may arrive when nobody is home, so we wanted to know when parcels tend to run late. Late parcels cost housemates time, and a cash on delivery parcel has to be paid for the moment it arrives. We asked three questions, and we wrote them down before we looked at any result. First, do parcels that see more heavy rain after the seller ships them arrive late more often? Second, does a public holiday in those same days make parcels late more often? Third, does adding weather and holidays make a late parcel model more accurate? Whatever the answers turned out to be, we promised to report them."
+  },
+  {
+    "id": "data",
+    "text": "We used four sources. Two come from Kaggle: the Olist orders table, with 99,441 marketplace orders and their purchase, shipping and delivery dates, and the Olist customers table, which tells us each customer's state. Two are free public APIs that need no key. Open Meteo gave us the daily rain at each state capital, and Nager Date gave us the nationwide public holidays. For every parcel we looked at the 7 days that start on the day the seller hands it to the carrier. A heavy rain day means at least 10 millimetres of rain, a standard threshold from a climate index called R ten millimetre. Keep in mind that this is Brazilian data, not Philippine, and that the weather is a single point per state. Because the two APIs are free and need no key, anyone can repeat the whole analysis from an empty folder with a single command."
+  },
+  {
+    "id": "cleaning",
+    "text": "We started with 99,441 orders. 2,965 were never delivered. From the 96,476 that were, we removed 740 with impossible or extreme timings, which left 95,736 parcels, or 96.3 percent of everything. We also fixed one subtle thing. Delivery estimates are stored at midnight, so a parcel that arrives at two in the afternoon on the promised day would look late. We count a parcel as late only if it arrives on a later calendar day. That puts the late rate at 6.51 percent, instead of 7.85 percent by the clock. Every step is written as code in the repository, so the numbers you hear can be reproduced."
+  },
+  {
+    "id": "shows",
+    "text": "Here is what the data shows. The median parcel takes 10.2 days to arrive, and one in ten takes more than 22.9 days. Estimates are padded: the typical parcel arrives 11.9 days early. Lateness spikes in some months, and March 2018 was the worst, at 18.5 percent late. The strongest warning sign is the seller. When a seller takes a week or more to hand over the parcel, 19.6 percent arrive late, against 3.1 percent when the handoff takes less than a day. A slow seller delays the whole journey, from about 7.2 days in total to about 19.0 days. Short promises are broken most often: 10.4 percent late when under ten days were promised, and 4.4 percent when thirty days or more were promised. Busy months also tend to be late months. People shop mostly in the afternoon and evening."
+  },
+  {
+    "id": "weather",
+    "text": "Now the weather and the holidays. In the raw numbers, rain seems to matter: the late rate climbs from 5.5 percent with no heavy rain day to 8.7 percent with three or more. But once we account for the month and the state, the pattern disappears. Each extra heavy rain day changes the odds of a late parcel by a factor of 1.01, with an interval from 0.95 to 1.07, which cannot be told apart from no effect. Rain on its own did not explain late parcels. An odds ratio of one means no difference, above one means more late parcels, and below one means fewer. Holidays came next. They surprised us. Parcels with a national holiday in their window were late 4.9 percent of the time, against 6.8 percent without one. That is the opposite of our guess, with an adjusted odds ratio of 0.55. We did not test why, so we make no claim about the cause. We repeated everything with ten day and fourteen day windows, and the table on the page lets you compare them with the headline."
+  },
+  {
+    "id": "model",
+    "text": "Can a model predict late parcels? We trained a gradient boosting model on parcels bought before January 2018, and tested it on 52,450 later parcels it had never seen. We split by time rather than at random, so the model is always judged on months it has not seen. At purchase, it scores an AUC of 0.552, where one half is a coin toss. After the seller ships, it rises to 0.625. Adding weather and holidays takes it to 0.661. That gain of 0.036 is clear, with an interval from 0.031 to 0.041. Of the added signals, total rain in the window mattered most. We did not test whether the gain mostly reflects where parcels were sent or the time of year, because weather differs by state and by season, so please read it as a modest association. The model is modest. Flagging the riskiest parcels catches 27.1 percent of the late ones, with 18.1 percent of the flags correct. And the weather is observed after the fact, so this explains parcels that already arrived. It is not a forecast the app could use today."
+  },
+  {
+    "id": "takeaways",
+    "text": "Five takeaways. One: about 6.5 percent of parcels arrive late, and most arrive well before the estimate. Two: the seller's handoff time is the strongest warning sign. Three: heavy rain looks like a cause in the raw numbers, but the pattern disappears once month and state are taken into account. Four: a public holiday in the window went with fewer late parcels, the opposite of our guess, and we do not know why. Five: a model can beat guessing, but it stays modest, with an AUC of 0.66 at best."
+  },
+  {
+    "id": "casama",
+    "text": "What could Casama do with this? Ask for the seller's handoff time when a parcel is added to the board, and warn housemates early when it is slow. And treat any warning as a nudge to plan who will be home, not as a promise. The pipeline is also reusable. Asked for the Philippines in 2026, the same holiday call returned 18 public holidays. Change the coordinates, and the weather call works the same way for Philippine households. It is only a nudge, so the final decision about who stays home stays with the housemates."
+  },
+  {
+    "id": "limits",
+    "text": "Finally, the limits. The data is Brazilian marketplace data, not Philippine. It holds timestamps only: no courier, no payment type, and no cash on delivery amount. Weather is one point per state, 27 capitals, and we do not know where each seller is. These results are associations, not causes. And the model is modest, so please treat it as a nudge, not a promise. Weather data is by Open Meteo under a Creative Commons attribution licence, and the holiday data comes from Nager Date."
+  },
+  {
+    "id": "credits",
+    "text": "Thank you for watching. This was our Data Science final project. Weather data by Open Meteo dot com, public holidays from Nager Date, and orders from the Olist public dataset on Kaggle. The full list of references is on the last slide and in the repository."
+  }
+]

@@ -1,0 +1,13 @@
+{
+  "country": "PH",
+  "year": 2026,
+  "holiday_count": 18,
+  "first_five": [
+    "New Year's Day",
+    "Chinese New Year",
+    "Maundy Thursday",
+    "Good Friday",
+    "Holy Saturday"
+  ],
+  "source": "https://date.nager.at/api/v3/PublicHolidays/2026/PH"
+}
