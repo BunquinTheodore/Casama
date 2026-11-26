@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en" data-resolution="landscape">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { margin: 0; width: 1920px; height: 1080px; overflow: hidden; background: #FFF8F1; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="534.7667" data-width="1920" data-height="1080">
+      <div id="title" data-composition-id="title" data-composition-src="compositions/title.html" data-start="0.0" data-duration="28.5667" data-track-index="1" data-track-kind="graphics" data-width="1920" data-height="1080"></div>
+      <div id="problem" data-composition-id="problem" data-composition-src="compositions/problem.html" data-start="28.5667" data-duration="35.9667" data-track-index="2" data-track-kind="graphics" data-width="1920" data-height="1080"></div>
+      <div id="idea" data-composition-id="idea" data-composition-src="compositions/idea.html" data-start="64.5333" data-duration="55.3667" data-track-index="3" data-track-kind="graphics" data-width="1920" data-height="1080"></div>
+      <div id="data" data-composition-id="data" data-composition-src="compositions/data.html" data-start="119.9" data-duration="68.1667" data-track-index="4" data-track-kind="graphics" data-width="1920" data-height="1080"></div>
+      <div id="algorithm" data-composition-id="algorithm" data-composition-src="compositions/algorithm.html" data-start="188.0667" data-duration="69.4667" data-track-index="5" data-track-kind="graphics" data-width="1920" data-height="1080"></div>
+      <div id="results" data-composition-id="results" data-composition-src="compositions/results.html" data-start="257.5333" data-duration="87.6" data-track-index="6" data-track-kind="graphics" data-width="1920" data-height="1080"></div>
+      <div id="app" data-composition-id="app" data-composition-src="compositions/app.html" data-start="345.1333" data-duration="63.3333" data-track-index="7" data-track-kind="graphics" data-width="1920" data-height="1080"></div>
+      <div id="privacy" data-composition-id="privacy" data-composition-src="compositions/privacy.html" data-start="408.4667" data-duration="41.8333" data-track-index="8" data-track-kind="graphics" data-width="1920" data-height="1080"></div>
+      <div id="limits" data-composition-id="limits" data-composition-src="compositions/limits.html" data-start="450.3" data-duration="43.5667" data-track-index="9" data-track-kind="graphics" data-width="1920" data-height="1080"></div>
+      <div id="credits" data-composition-id="credits" data-composition-src="compositions/credits.html" data-start="493.8667" data-duration="40.9" data-track-index="10" data-track-kind="graphics" data-width="1920" data-height="1080"></div>
+      <audio id="sound" src="assets/sound.m4a" data-start="0" data-duration="534.7667" data-volume="1"></audio>
+    </div>
+    <script>
+      const tl = gsap.timeline({ paused: true });
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>

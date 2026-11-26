@@ -1,0 +1,349 @@
+{
+ "fps": 30,
+ "total": 534.7667,
+ "estimated": false,
+ "scenes": [
+  {
+   "id": "title",
+   "start": 0.0,
+   "duration": 28.5667,
+   "lead": 0.6,
+   "audio": "audio_local/title.mp3",
+   "beats": {
+    "name": {
+     "at": 1.196,
+     "sfx": "pop"
+    },
+    "group": {
+     "at": 4.741,
+     "sfx": "pop"
+    },
+    "skill": {
+     "at": 14.442,
+     "sfx": "tick"
+    },
+    "honest": {
+     "at": 25.143,
+     "sfx": "thud"
+    }
+   }
+  },
+  {
+   "id": "problem",
+   "start": 28.5667,
+   "duration": 35.9667,
+   "lead": 0.6,
+   "audio": "audio_local/problem.mp3",
+   "beats": {
+    "board": {
+     "at": 3.252,
+     "sfx": "swish"
+    },
+    "taps": {
+     "at": 5.371,
+     "sfx": "pop"
+    },
+    "warning": {
+     "at": 11.3,
+     "sfx": "thud"
+    },
+    "question": {
+     "at": 28.784,
+     "sfx": "pop"
+    },
+    "window": {
+     "at": 32.55,
+     "sfx": "pop"
+    }
+   }
+  },
+  {
+   "id": "idea",
+   "start": 64.5333,
+   "duration": 55.3667,
+   "lead": 0.6,
+   "audio": "audio_local/idea.mp3",
+   "beats": {
+    "forecast": {
+     "at": 0.6,
+     "sfx": "tick"
+    },
+    "slots": {
+     "at": 15.838,
+     "sfx": "pop"
+    },
+    "alex": {
+     "at": 6.856,
+     "sfx": "tick"
+    },
+    "recent": {
+     "at": 27.427,
+     "sfx": "swish"
+    },
+    "habit": {
+     "at": 32.76,
+     "sfx": "pop"
+    }
+   }
+  },
+  {
+   "id": "data",
+   "start": 119.9,
+   "duration": 68.1667,
+   "lead": 0.6,
+   "audio": "audio_local/data.mp3",
+   "beats": {
+    "casas": {
+     "at": 4.748,
+     "sfx": "pop"
+    },
+    "labels": {
+     "at": 16.691,
+     "sfx": "tick"
+    },
+    "three": {
+     "at": 31.273,
+     "sfx": "pop"
+    },
+    "left": {
+     "at": 42.392,
+     "sfx": "swish"
+    },
+    "gate": {
+     "at": 49.453,
+     "sfx": "thud"
+    },
+    "few": {
+     "at": 55.882,
+     "sfx": "thud"
+    },
+    "notfil": {
+     "at": 61.683,
+     "sfx": "tick"
+    }
+   }
+  },
+  {
+   "id": "algorithm",
+   "start": 188.0667,
+   "duration": 69.4667,
+   "lead": 0.6,
+   "audio": "audio_local/algorithm.mp3",
+   "beats": {
+    "s1": {
+     "at": 3.481,
+     "sfx": "pop"
+    },
+    "decay": {
+     "at": 9.878,
+     "sfx": "swish"
+    },
+    "half": {
+     "at": 17.025,
+     "sfx": "tick"
+    },
+    "s2": {
+     "at": 19.459,
+     "sfx": "pop"
+    },
+    "fade": {
+     "at": 27.707,
+     "sfx": "swish"
+    },
+    "s3": {
+     "at": 30.69,
+     "sfx": "rise"
+    },
+    "weights": {
+     "at": 39.077,
+     "sfx": "tick"
+    },
+    "whole": {
+     "at": 45.362,
+     "sfx": "thud"
+    },
+    "flat": {
+     "at": 63.799,
+     "sfx": "pop"
+    }
+   }
+  },
+  {
+   "id": "results",
+   "start": 257.5333,
+   "duration": 87.6,
+   "lead": 0.6,
+   "audio": "audio_local/results.mp3",
+   "beats": {
+    "test": {
+     "at": 2.977,
+     "sfx": "tick"
+    },
+    "score": {
+     "at": 10.892,
+     "sfx": "pop"
+    },
+    "base": {
+     "at": 13.706,
+     "sfx": "pop"
+    },
+    "lower": {
+     "at": 25.926,
+     "sfx": "tick"
+    },
+    "wins": {
+     "at": 35.959,
+     "sfx": "thud"
+    },
+    "rank": {
+     "at": 42.747,
+     "sfx": "swish"
+    },
+    "weeks": {
+     "at": 47.042,
+     "sfx": "pop"
+    },
+    "gbm": {
+     "at": 57.917,
+     "sfx": "pop"
+    },
+    "failed": {
+     "at": 77.021,
+     "sfx": "thud"
+    }
+   }
+  },
+  {
+   "id": "app",
+   "start": 345.1333,
+   "duration": 63.3333,
+   "lead": 0.6,
+   "audio": "audio_local/app.mp3",
+   "beats": {
+    "real": {
+     "at": 2.859,
+     "sfx": "pop"
+    },
+    "card": {
+     "at": 9.498,
+     "sfx": "pop"
+    },
+    "reason": {
+     "at": 13.261,
+     "sfx": "tick"
+    },
+    "atleast": {
+     "at": 20.744,
+     "sfx": "pop"
+    },
+    "window": {
+     "at": 25.052,
+     "sfx": "swish"
+    },
+    "dart": {
+     "at": 31.825,
+     "sfx": "pop"
+    },
+    "parity": {
+     "at": 36.782,
+     "sfx": "thud"
+    },
+    "advice": {
+     "at": 46.805,
+     "sfx": "thud"
+    }
+   }
+  },
+  {
+   "id": "privacy",
+   "start": 408.4667,
+   "duration": 41.8333,
+   "lead": 0.6,
+   "audio": "audio_local/privacy.mp3",
+   "beats": {
+    "sensitive": {
+     "at": 4.47,
+     "sfx": "thud"
+    },
+    "off": {
+     "at": 7.759,
+     "sfx": "pop"
+    },
+    "taps": {
+     "at": 13.525,
+     "sfx": "tick"
+    },
+    "device": {
+     "at": 19.946,
+     "sfx": "pop"
+    },
+    "deletes": {
+     "at": 30.095,
+     "sfx": "swish"
+    },
+    "demo": {
+     "at": 35.081,
+     "sfx": "tick"
+    }
+   }
+  },
+  {
+   "id": "limits",
+   "start": 450.3,
+   "duration": 43.5667,
+   "lead": 0.6,
+   "audio": "audio_local/limits.mp3",
+   "beats": {
+    "over": {
+     "at": 2.383,
+     "sfx": "thud"
+    },
+    "indep": {
+     "at": 17.519,
+     "sfx": "pop"
+    },
+    "untested": {
+     "at": 24.879,
+     "sfx": "tick"
+    },
+    "reset": {
+     "at": 28.724,
+     "sfx": "swish"
+    },
+    "filipino": {
+     "at": 33.101,
+     "sfx": "thud"
+    }
+   }
+  },
+  {
+   "id": "credits",
+   "start": 493.8667,
+   "duration": 40.9,
+   "lead": 0.6,
+   "audio": "audio_local/credits.mp3",
+   "beats": {
+    "group": {
+     "at": 1.657,
+     "sfx": "pop"
+    },
+    "casas": {
+     "at": 3.927,
+     "sfx": "tick"
+    },
+    "licence": {
+     "at": 12.677,
+     "sfx": "pop"
+    },
+    "refs": {
+     "at": 28.94,
+     "sfx": "pop"
+    },
+    "thanks": {
+     "at": 32.031,
+     "sfx": "swish"
+    }
+   }
+  }
+ ]
+}

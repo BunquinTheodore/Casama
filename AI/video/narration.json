@@ -1,0 +1,42 @@
+[
+  {
+    "id": "title",
+    "text": "This is Casama Home Forecast, the AI final project of group Theoraux. Casama is an app for people who share a home. This project teaches it one new skill: telling you, before a parcel arrives, who is probably home to receive it. It is built into the real app, not into a separate one. Everything you will hear was measured on real data, including the parts that did not work."
+  },
+  {
+    "id": "problem",
+    "text": "Here is the problem. On the Casama parcel board, every housemate taps available for each parcel. The warning that nobody can receive it only appears after everyone has tapped unavailable, which is often too late. Nothing tells the buyer, ahead of time, whether anybody is likely to be home. So the question for this project is simple. Given what each housemate's own home and out history looks like, who is likely to be home when a parcel is expected, and which window is the safest?"
+  },
+  {
+    "id": "idea",
+    "text": "A forecast is a probability, not a promise. The idea is that people have routines. If Alex was home on the last three Thursdays at two in the afternoon, Alex is probably home this Thursday. So we cut the week into 168 slots, one for every hour from Monday midnight to Sunday night. For each person and each slot, we keep a running estimate of how often they were home. Recent weeks count more than old weeks, because routines change. That estimate is called the habit. The more weeks we see, the more sure it becomes. After three Thursdays at home, the slot says home, three out of three, and the forecast leans that way. But a person who is home one Thursday and out the next ends up near fifty percent, and that is honest: the model is telling you it does not know."
+  },
+  {
+    "id": "data",
+    "text": "To test this honestly we need real homes, so we used the CASAS smart home dataset from Washington State University, shared under a Creative Commons licence that allows reuse with credit. Its sensors record when people leave home and come back. We turn those two labels into one answer for every hour of the day, home or away. An hour counts as home when the labels say someone was inside for thirty minutes or more of it. 3 of the five homes have both labels: Aruba with 219 days, and the two Tulum homes with 120 and 183 days. Cairo and Milan only record leaving, so we left them out. Before fitting anything we wrote a rule: at least two homes with at least 42 days each. The data passed. But be careful. Three homes is very few, and two of them come from the same research testbed. Also, none of them is Filipino, and a label marks a household, not a person."
+  },
+  {
+    "id": "algorithm",
+    "text": "Here is the algorithm, in three steps. Step one, the habit. For every slot we average the past hours when the person was home, and an old observation counts for less. The half life is 14 days, so a reading from two weeks ago counts half as much as one from today. Step two, the present. If you are home right now, you are more likely to be home in the next few hours, and that effect fades with a time constant of 12 hours. Step three, combine. A logistic regression with just three numbers turns the habit and the present into one probability. The habit carries the most weight, 1.29, and the present adds 1.36. That is the whole model. It runs on the phone, and you can explain every number in it. There is no hidden layer and no black box. If the forecast says seventy percent, the app can point at the exact Thursdays that produced it. For a new person with no history, the forecast starts at fifty percent, and I will explain why in a moment."
+  },
+  {
+    "id": "results",
+    "text": "Does it work? We tested it by leaving one home out at a time and forecasting forward in time, using only the past. At three hours ahead, the model's error score is 0.11. The plain average for that hour of the week scores 0.12, guessing the same as right now scores 0.13, and a constant guess scores 0.15. Lower is better. The error score is the average squared miss, so a perfect forecast scores zero and a coin flip scores a quarter. The model wins on error at every horizon, out to three days, but not on ranking: from six hours ahead, the plain average ranks hours slightly better. It needs about two weeks of history. With seven days the ranking score is 0.79, and with twenty eight days it is 0.84. A heavier model, gradient boosting, did no better. It scored 0.12 at three hours ahead, against 0.11 for the small model, so the extra complexity buys nothing here. We also checked whether the numbers can be trusted as probabilities, and mostly they can. And one idea failed. Starting a new home from the other homes' average made the first week worse, so the app starts everyone at fifty percent."
+  },
+  {
+    "id": "app",
+    "text": "Now the integration. This is the real Casama app, running in a browser. On every upcoming parcel there is a new card. Cas thinks Ria is probably home, and gives the reason: Ria was home on three of the last three Wednesdays at four in the afternoon. It also shows the chance that at least one housemate is home, and in the add parcel sheet, the best two hour window for that day. Under the hood, the Python model exports its numbers, and a small Dart module in the app, tested against the Python results to nine decimal places, does the forecasting on the phone. It only advises, for parcels up to three days away, the range we tested. It never changes who is marked available. In the demo household all four housemates have already switched the forecast on, and the history you see is demo filler taken from the real homes, not from real housemates."
+  },
+  {
+    "id": "privacy",
+    "text": "A routine forecast is sensitive, because used badly it tells someone when a home is empty. So it is off by default for every member, and each person switches it on in settings. It learns only from the home and out taps that people already make. No location, no new permission. It runs on the device, and it is shown only to housemates, as a probability for one hour with a short reason, never as a full schedule. Turning it off deletes what Cas learned. In the demo household everyone is pre opted in, because the demo has one user who can tap, and we say so."
+  },
+  {
+    "id": "limits",
+    "text": "Now, what it cannot do. It is overconfident when it says away: forecasts below fifty percent were home more often than it said. When it said about 35 percent, the person was home 46 percent of the time. The chance that someone is home assumes housemates are independent, which they are not. The ranking and the window were built on the forecast, but not tested separately. The history lives in memory and resets when the app restarts. And nobody has tested it with real Filipino housemates. Three homes is a small sample, so every number here could move with a fourth home. That is the next step."
+  },
+  {
+    "id": "credits",
+    "text": "This was made by group Theoraux. The data is the CASAS smart home dataset, by Diane Cook and colleagues at Washington State University, shared under CC BY 4.0. The voice is synthetic, made on this computer with Kokoro, an open source speech model under the Apache 2.0 licence. The sources, including the paper on predicting household occupancy, are listed in the references file in this repository. Thank you for watching."
+  }
+]

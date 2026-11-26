@@ -1,0 +1,90 @@
+<template>
+  <style>
+
+@font-face{font-family:'Josefin Sans';font-weight:300;src:url('assets/fonts/JosefinSans.woff2') format('woff2');}
+@font-face{font-family:'Manrope';font-weight:500;src:url('assets/fonts/Manrope.woff2') format('woff2');}
+#root{position:absolute;inset:0;background:#FFF8F1;color:#1B2A4A;font-family:'Manrope',sans-serif;font-weight:500;overflow:hidden}
+#root *{box-sizing:border-box}
+.abs{position:absolute}
+.layer{position:absolute;left:0;top:0;width:1920px;height:1080px}
+.h1{font-family:'Josefin Sans',sans-serif;font-weight:300;text-transform:uppercase;letter-spacing:.06em;line-height:1.06;font-size:112px;white-space:nowrap}
+.h2{font-family:'Josefin Sans',sans-serif;font-weight:300;text-transform:uppercase;letter-spacing:.06em;line-height:1.1;font-size:68px}
+.num{font-family:'Montserrat',sans-serif;font-weight:800;letter-spacing:-.02em;line-height:1}
+.coral{color:#C0503F}
+.body{font-size:36px;line-height:1.35}
+.small{font-size:30px;line-height:1.3}
+.panel{position:absolute;background:#fff;border:2px solid #1B2A4A;border-radius:28px;box-shadow:10px 10px 0 rgba(27,42,74,.12)}
+.ink{background:#1B2A4A;color:#FFF8F1}
+.stamp{position:absolute;border:5px solid #E8776A;color:#C0503F;border-radius:14px;padding:10px 28px;font-family:'Montserrat',sans-serif;font-weight:800;font-size:40px;letter-spacing:.05em;text-transform:uppercase;white-space:nowrap;background:#FFF8F1}
+.stamp.ink{border-color:#1B2A4A;color:#1B2A4A}
+.phone{position:absolute;border:10px solid #1B2A4A;border-radius:46px;overflow:hidden;background:#FFF8F1;box-shadow:10px 10px 0 rgba(27,42,74,.12)}
+.phone img{display:block;width:100%}
+.wipe{position:absolute;left:0;top:0;width:1920px;height:1080px;background:#E8776A}
+.rule{position:absolute;height:2px;background:#1B2A4A}
+.row{position:absolute;display:flex;align-items:center;font-size:36px}
+.tag{font-family:'Montserrat',sans-serif;font-weight:800;font-size:28px;letter-spacing:.06em;text-transform:uppercase}
+
+
+  </style>
+  <div id="root" data-composition-id="results" data-width="1920" data-height="1080">
+<div class="layer" id="results-stage">
+
+    <div class="abs h2" id="results-h" style="left:96px;top:100px;width:740px">Does it work?</div>
+    <div class="abs body" id="results-test" style="left:96px;top:300px;width:700px;font-size:34px">Leave one home out. Forecast forward in time. Use only the past.</div>
+    <div class="stamp ink" id="results-lower" style="left:96px;top:520px">Lower is better</div>
+    <div class="layer" id="results-pa"><div class="abs" id="results-ba0" style="left:900px;top:190px;width:924px;height:96px"><div class="abs small" style="left:0;top:28px;width:360px">The model</div><div class="abs" id="results-bar0" style="left:380px;top:12px;width:333px;height:72px;background:#E8776A;border-radius:12px"></div><div class="abs num" id="results-bv0" style="left:731px;top:22px;font-size:44px;color:#E8776A">0</div></div><div class="abs" id="results-ba1" style="left:900px;top:310px;width:924px;height:96px"><div class="abs small" style="left:0;top:28px;width:360px">Plain hour of week average</div><div class="abs" id="results-bar1" style="left:380px;top:12px;width:360px;height:72px;background:#1B2A4A;border-radius:12px"></div><div class="abs num" id="results-bv1" style="left:758px;top:22px;font-size:44px;color:#1B2A4A">0</div></div><div class="abs" id="results-ba2" style="left:900px;top:430px;width:924px;height:96px"><div class="abs small" style="left:0;top:28px;width:360px">Same as right now</div><div class="abs" id="results-bar2" style="left:380px;top:12px;width:398px;height:72px;background:#1B2A4A;border-radius:12px"></div><div class="abs num" id="results-bv2" style="left:796px;top:22px;font-size:44px;color:#1B2A4A">0</div></div><div class="abs" id="results-ba3" style="left:900px;top:550px;width:924px;height:96px"><div class="abs small" style="left:0;top:28px;width:360px">Constant guess</div><div class="abs" id="results-bar3" style="left:380px;top:12px;width:447px;height:72px;background:#1B2A4A;border-radius:12px"></div><div class="abs num" id="results-bv3" style="left:845px;top:22px;font-size:44px;color:#1B2A4A">0</div></div><div class="abs tag" style="left:900px;top:110px">Error score (Brier), 3 hours ahead</div></div>
+    <div class="layer" id="results-pb"><svg class="abs" style="left:900px;top:130px" width="924" height="640" viewBox="0 0 924 640"><path id="results-ln-model" d="M70,518 L195,405 L320,364 L445,374 L570,391 L695,384 L820,388" fill="none" stroke="#E8776A" stroke-width="10" stroke-linecap="butt" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/><circle cx="70" cy="518" r="10" fill="#E8776A"/><circle cx="195" cy="405" r="10" fill="#E8776A"/><circle cx="320" cy="364" r="10" fill="#E8776A"/><circle cx="445" cy="374" r="10" fill="#E8776A"/><circle cx="570" cy="391" r="10" fill="#E8776A"/><circle cx="695" cy="384" r="10" fill="#E8776A"/><circle cx="820" cy="388" r="10" fill="#E8776A"/><path id="results-ln-slot_mean" d="M70,338 L195,338 L320,338 L445,337 L570,339 L695,347 L820,366" fill="none" stroke="#1B2A4A" stroke-width="6" stroke-linecap="butt" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/><circle cx="70" cy="338" r="6" fill="#1B2A4A"/><circle cx="195" cy="338" r="6" fill="#1B2A4A"/><circle cx="320" cy="338" r="6" fill="#1B2A4A"/><circle cx="445" cy="337" r="6" fill="#1B2A4A"/><circle cx="570" cy="339" r="6" fill="#1B2A4A"/><circle cx="695" cy="347" r="6" fill="#1B2A4A"/><circle cx="820" cy="366" r="6" fill="#1B2A4A"/><path id="results-ln-persistence" d="M70,470 L195,243 L320,128 L445,65 L570,274 L695,228 L820,196" fill="none" stroke="#4F6580" stroke-width="6" stroke-linecap="butt" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/><circle cx="70" cy="470" r="6" fill="#4F6580"/><circle cx="195" cy="243" r="6" fill="#4F6580"/><circle cx="320" cy="128" r="6" fill="#4F6580"/><circle cx="445" cy="65" r="6" fill="#4F6580"/><circle cx="570" cy="274" r="6" fill="#4F6580"/><circle cx="695" cy="228" r="6" fill="#4F6580"/><circle cx="820" cy="196" r="6" fill="#4F6580"/><path id="results-ln-base_rate" d="M70,122 L195,123 L320,124 L445,124 L570,124 L695,125 L820,122" fill="none" stroke="#9AA3B2" stroke-width="6" stroke-linecap="butt" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/><circle cx="70" cy="122" r="6" fill="#9AA3B2"/><circle cx="195" cy="123" r="6" fill="#9AA3B2"/><circle cx="320" cy="124" r="6" fill="#9AA3B2"/><circle cx="445" cy="124" r="6" fill="#9AA3B2"/><circle cx="570" cy="124" r="6" fill="#9AA3B2"/><circle cx="695" cy="125" r="6" fill="#9AA3B2"/><circle cx="820" cy="122" r="6" fill="#9AA3B2"/><text x="70" y="610" text-anchor="middle" font-size="28" fill="#1B2A4A" font-family="Manrope">1 h</text><text x="195" y="610" text-anchor="middle" font-size="28" fill="#1B2A4A" font-family="Manrope">3 h</text><text x="320" y="610" text-anchor="middle" font-size="28" fill="#1B2A4A" font-family="Manrope">6 h</text><text x="445" y="610" text-anchor="middle" font-size="28" fill="#1B2A4A" font-family="Manrope">12 h</text><text x="570" y="610" text-anchor="middle" font-size="28" fill="#1B2A4A" font-family="Manrope">24 h</text><text x="695" y="610" text-anchor="middle" font-size="28" fill="#1B2A4A" font-family="Manrope">48 h</text><text x="820" y="610" text-anchor="middle" font-size="28" fill="#1B2A4A" font-family="Manrope">72 h</text></svg><div class="abs small" style="left:900px;top:760px;color:#E8776A"><span style="display:inline-block;width:26px;height:8px;background:#E8776A;margin-right:12px"></span>The model</div><div class="abs small" style="left:1360px;top:760px;color:#1B2A4A"><span style="display:inline-block;width:26px;height:8px;background:#1B2A4A;margin-right:12px"></span>Plain average</div><div class="abs small" style="left:900px;top:804px;color:#4F6580"><span style="display:inline-block;width:26px;height:8px;background:#4F6580;margin-right:12px"></span>Same as right now</div><div class="abs small" style="left:1360px;top:804px;color:#4F6580"><span style="display:inline-block;width:26px;height:8px;background:#9AA3B2;margin-right:12px"></span>Constant</div>
+      <div class="abs tag" style="left:900px;top:90px">Error score by hours ahead, lower is better</div></div>
+    <div class="panel" id="results-rank" style="left:96px;top:620px;width:740px;height:300px;padding:30px 36px"><div class="tag coral">Ranking, AUC</div><div class="body" style="font-size:32px;margin-top:14px">From 6 hours ahead the plain average ranks slightly better.</div><div class="small" style="margin-top:14px">0.787 against 0.780 at 6 hours, 0.786 against 0.768 at 24</div></div>
+    <div class="layer" id="results-pc">
+      <div class="abs tag" style="left:900px;top:90px">Ranking score (AUC) by days of history</div>
+      <svg class="abs" style="left:900px;top:130px" width="924" height="400" viewBox="0 0 924 400"><path id="results-lc" d="M60,260 L310,128 L560,94 L810,85" fill="none" stroke="#E8776A" stroke-width="8" stroke-linecap="butt" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/><circle cx="60" cy="260" r="9" fill="#E8776A"/><text x="60" y="240" text-anchor="middle" font-size="28" font-weight="800" fill="#1B2A4A" font-family="Montserrat">0.66</text><circle cx="310" cy="128" r="9" fill="#E8776A"/><text x="310" y="108" text-anchor="middle" font-size="28" font-weight="800" fill="#1B2A4A" font-family="Montserrat">0.79</text><circle cx="560" cy="94" r="9" fill="#E8776A"/><text x="560" y="74" text-anchor="middle" font-size="28" font-weight="800" fill="#1B2A4A" font-family="Montserrat">0.83</text><circle cx="810" cy="85" r="9" fill="#E8776A"/><text x="810" y="65" text-anchor="middle" font-size="28" font-weight="800" fill="#1B2A4A" font-family="Montserrat">0.84</text><text x="60" y="360" text-anchor="middle" font-size="28" fill="#1B2A4A" font-family="Manrope">3 days</text><text x="310" y="360" text-anchor="middle" font-size="28" fill="#1B2A4A" font-family="Manrope">7 days</text><text x="560" y="360" text-anchor="middle" font-size="28" fill="#1B2A4A" font-family="Manrope">14 days</text><text x="810" y="360" text-anchor="middle" font-size="28" fill="#1B2A4A" font-family="Manrope">28 days</text></svg>
+      <div class="panel" id="results-gbm" style="left:900px;top:590px;width:430px;height:250px;padding:24px 28px"><div class="tag">Gradient boosting</div><div class="num" style="font-size:56px;margin-top:10px">0.117</div><div class="small">vs 0.111 for the small model</div></div>
+      <div class="panel" id="results-prior" style="left:1394px;top:590px;width:430px;height:250px;padding:24px 28px"><div class="tag">First week, new home</div><div class="num coral" style="font-size:56px;margin-top:10px">0.217</div><div class="small">other homes' average, against 0.168 from 50%</div></div>
+      <div class="stamp" id="results-failed" style="left:1480px;top:860px">Failed</div>
+    </div>
+    </div>
+    <div class="abs" data-layout-ignore style="left:96px;top:1040px;width:1728px;height:6px;background:rgba(27,42,74,.12);border-radius:3px"></div>
+    <div class="abs" data-layout-ignore id="results-prog" style="left:96px;top:1040px;width:1728px;height:6px;background:#E8776A;border-radius:3px"></div>
+    <div class="wipe" data-layout-allow-overflow id="results-wipe"></div>
+  </div>
+  <script>
+    const B = {"test": 2.977, "score": 10.892, "base": 13.706, "lower": 25.926, "wins": 35.959, "rank": 42.747, "weeks": 47.042, "gbm": 57.917, "failed": 77.021};
+
+const tl = gsap.timeline({paused:true});
+const rise = (sel, t, d = 0.5, y = 28) => tl.fromTo(sel, {opacity:0, y:y}, {opacity:1, y:0, duration:d, ease:'power3.out'}, t);
+const fade = (sel, t, d = 0.4) => tl.fromTo(sel, {opacity:0}, {opacity:1, duration:d, ease:'power1.out'}, t);
+const hide = (sel, t, d = 0.35) => tl.to(sel, {opacity:0, duration:d, ease:'power1.in'}, t);
+const stamp = (sel, t, rot = -3) => tl.fromTo(sel, {opacity:0, scale:1.6, rotation:rot * 2.5}, {opacity:1, scale:1, rotation:rot, duration:0.35, ease:'back.out(2)'}, t);
+const growY = (sel, t, d = 0.8) => tl.fromTo(sel, {scaleY:0, transformOrigin:'50% 100%'}, {scaleY:1, transformOrigin:'50% 100%', duration:d, ease:'power2.out'}, t);
+const growX = (sel, t, d = 0.8) => tl.fromTo(sel, {scaleX:0, transformOrigin:'0% 50%'}, {scaleX:1, transformOrigin:'0% 50%', duration:d, ease:'power2.out'}, t);
+const draw = (sel, t, d = 1.0) => tl.fromTo(sel, {strokeDashoffset:1}, {strokeDashoffset:0, duration:d, ease:'power1.inOut'}, t);
+const count = (sel, t, to, dec = 2, d = 0.9) => { const o = {v:0}; tl.to(o, {v:to, duration:d, ease:'power2.out', onUpdate(){ document.querySelector(sel).textContent = o.v.toFixed(dec); }}, t); };
+const wipe = (sel) => tl.fromTo(sel, {xPercent:0}, {xPercent:101, duration:0.55, ease:'power3.inOut'}, 0);
+
+    wipe('#results-wipe');
+    tl.fromTo('#results-stage', {scale:1, transformOrigin:'35% 45%'}, {scale:1.035, transformOrigin:'35% 45%', duration:86.80, ease:'none'}, 0.19999999999999996);
+    tl.fromTo('#results-prog', {scaleX:0, transformOrigin:'0% 50%'}, {scaleX:1, transformOrigin:'0% 50%', duration:85.80, ease:'none'}, 0.6);
+
+    rise('#results-h', 0.8, 0.5);
+    rise('#results-test', B.test, 0.5, 18);
+    tl.set('#results-pb,#results-pc,#results-rank', {opacity:0}, 0);
+    fade('#results-pa', B.score - 0.2, 0.4);
+    growX('#results-bar0', B.score, 0.8);  count('#results-bv0', B.score, 0.110874, 3, 0.8);
+    growX('#results-bar1', B.base, 0.8);   count('#results-bv1', B.base, 0.119872, 3, 0.8);
+    stamp('#results-lower', B.lower, -3);
+    growX('#results-bar2', B.lower + 0.3, 0.8); count('#results-bv2', B.lower + 0.3, 0.132618, 3, 0.8);
+    growX('#results-bar3', B.lower + 0.6, 0.8); count('#results-bv3', B.lower + 0.6, 0.148874, 3, 0.8);
+    hide('#results-pa', B.wins - 0.1, 0.3);
+    fade('#results-pb', B.wins, 0.4);
+    ['base_rate', 'persistence', 'slot_mean', 'model'].forEach((n, i) => draw('#results-ln-' + n, B.wins + 0.2 + i * 0.35, 1.0));
+    rise('#results-rank', B.rank, 0.5, 24);
+    hide('#results-pb,#results-rank', B.weeks - 0.1, 0.3);
+    fade('#results-pc', B.weeks, 0.4);
+    draw('#results-lc', B.weeks + 0.2, 1.8);
+    rise('#results-gbm', B.gbm, 0.5, 24);
+    rise('#results-prior', B.failed - 0.3, 0.5, 24);
+    stamp('#results-failed', B.failed, -6);
+    window.__timelines["results"] = tl;
+  </script>
+</template>

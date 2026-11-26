@@ -1,0 +1,516 @@
+{
+ "data": [
+  {
+   "id": "aruba",
+   "days": 219,
+   "hours": 5267,
+   "home_share": 0.8633,
+   "multi_resident": false,
+   "resident_note": "one resident, an older adult (CASAS listing)"
+  },
+  {
+   "id": "tulum1",
+   "days": 120,
+   "hours": 2895,
+   "home_share": 0.67772,
+   "multi_resident": true,
+   "resident_note": "reported to have two residents (CASAS listing, not stated in the Zenodo record)"
+  },
+  {
+   "id": "tulum2",
+   "days": 183,
+   "hours": 4415,
+   "home_share": 0.853454,
+   "multi_resident": true,
+   "resident_note": "reported to have two residents (CASAS listing, not stated in the Zenodo record)"
+  }
+ ],
+ "gate": {
+  "passed": true,
+  "min_days": 42,
+  "min_coverage": 0.7,
+  "min_homes": 2,
+  "usable_homes": 3,
+  "homes": [
+   {
+    "id": "aruba",
+    "days": 219,
+    "hours": 5267,
+    "first_hour": "2010-11-04T12:00",
+    "last_hour": "2011-06-11T22:00",
+    "home_share": 0.8632997911524587,
+    "coverage": 1.0,
+    "usable": true
+   },
+   {
+    "id": "tulum1",
+    "days": 120,
+    "hours": 2895,
+    "first_hour": "2009-04-02T08:00",
+    "last_hour": "2009-07-31T22:00",
+    "home_share": 0.677720207253886,
+    "coverage": 1.0,
+    "usable": true
+   },
+   {
+    "id": "tulum2",
+    "days": 183,
+    "hours": 4415,
+    "first_hour": "2009-09-25T18:00",
+    "last_hour": "2010-03-28T16:00",
+    "home_share": 0.8534541336353341,
+    "coverage": 1.0,
+    "usable": true
+   }
+  ]
+ },
+ "fragile": true,
+ "prior": {
+  "mode": "flat",
+  "cold_start_brier_with_population_prior": 0.21729,
+  "cold_start_brier_flat_prior": 0.167566
+ },
+ "horizons": {
+  "1": {
+   "model": {
+    "auc": 0.882057,
+    "brier": 0.095704,
+    "log_loss": 0.315928,
+    "accuracy": 0.869511,
+    "n": 12070
+   },
+   "base_rate": {
+    "auc": 0.5,
+    "brier": 0.148985,
+    "log_loss": 0.47962,
+    "accuracy": 0.824275,
+    "n": 12070
+   },
+   "slot_mean": {
+    "auc": 0.786847,
+    "brier": 0.119895,
+    "log_loss": 0.751178,
+    "accuracy": 0.858409,
+    "n": 12070
+   },
+   "persistence": {
+    "auc": 0.760387,
+    "brier": 0.102164,
+    "log_loss": 0.349022,
+    "accuracy": 0.884673,
+    "n": 12070
+   },
+   "gbm": {
+    "auc": 0.869789,
+    "brier": 0.106077,
+    "log_loss": 0.343827,
+    "accuracy": 0.85261,
+    "n": 12070
+   }
+  },
+  "3": {
+   "model": {
+    "auc": 0.830821,
+    "brier": 0.110874,
+    "log_loss": 0.365646,
+    "accuracy": 0.85809,
+    "n": 12064
+   },
+   "base_rate": {
+    "auc": 0.5,
+    "brier": 0.148874,
+    "log_loss": 0.479345,
+    "accuracy": 0.824436,
+    "n": 12064
+   },
+   "slot_mean": {
+    "auc": 0.786869,
+    "brier": 0.119872,
+    "log_loss": 0.750407,
+    "accuracy": 0.858422,
+    "n": 12064
+   },
+   "persistence": {
+    "auc": 0.659033,
+    "brier": 0.132618,
+    "log_loss": 0.42538,
+    "accuracy": 0.789954,
+    "n": 12064
+   },
+   "gbm": {
+    "auc": 0.824711,
+    "brier": 0.11745,
+    "log_loss": 0.387204,
+    "accuracy": 0.840434,
+    "n": 12064
+   }
+  },
+  "6": {
+   "model": {
+    "auc": 0.779877,
+    "brier": 0.116343,
+    "log_loss": 0.387449,
+    "accuracy": 0.851514,
+    "n": 12055
+   },
+   "base_rate": {
+    "auc": 0.5,
+    "brier": 0.148732,
+    "log_loss": 0.478989,
+    "accuracy": 0.824637,
+    "n": 12055
+   },
+   "slot_mean": {
+    "auc": 0.786763,
+    "brier": 0.119878,
+    "log_loss": 0.749821,
+    "accuracy": 0.858399,
+    "n": 12055
+   },
+   "persistence": {
+    "auc": 0.534737,
+    "brier": 0.14822,
+    "log_loss": 0.470416,
+    "accuracy": 0.776027,
+    "n": 12055
+   },
+   "gbm": {
+    "auc": 0.79521,
+    "brier": 0.119575,
+    "log_loss": 0.407357,
+    "accuracy": 0.842223,
+    "n": 12055
+   }
+  },
+  "12": {
+   "model": {
+    "auc": 0.755656,
+    "brier": 0.115081,
+    "log_loss": 0.389587,
+    "accuracy": 0.854947,
+    "n": 12037
+   },
+   "base_rate": {
+    "auc": 0.5,
+    "brier": 0.148666,
+    "log_loss": 0.478804,
+    "accuracy": 0.824707,
+    "n": 12037
+   },
+   "slot_mean": {
+    "auc": 0.786244,
+    "brier": 0.119975,
+    "log_loss": 0.749794,
+    "accuracy": 0.85827,
+    "n": 12037
+   },
+   "persistence": {
+    "auc": 0.329548,
+    "brier": 0.156587,
+    "log_loss": 0.503297,
+    "accuracy": 0.824707,
+    "n": 12037
+   },
+   "gbm": {
+    "auc": 0.755204,
+    "brier": 0.13237,
+    "log_loss": 0.456767,
+    "accuracy": 0.825538,
+    "n": 12037
+   }
+  },
+  "24": {
+   "model": {
+    "auc": 0.767655,
+    "brier": 0.112742,
+    "log_loss": 0.380361,
+    "accuracy": 0.854595,
+    "n": 12001
+   },
+   "base_rate": {
+    "auc": 0.5,
+    "brier": 0.148758,
+    "log_loss": 0.479054,
+    "accuracy": 0.824598,
+    "n": 12001
+   },
+   "slot_mean": {
+    "auc": 0.786433,
+    "brier": 0.119751,
+    "log_loss": 0.743985,
+    "accuracy": 0.858428,
+    "n": 12001
+   },
+   "persistence": {
+    "auc": 0.645721,
+    "brier": 0.12853,
+    "log_loss": 0.416869,
+    "accuracy": 0.7986,
+    "n": 12001
+   },
+   "gbm": {
+    "auc": 0.744946,
+    "brier": 0.132988,
+    "log_loss": 0.466877,
+    "accuracy": 0.819598,
+    "n": 12001
+   }
+  },
+  "48": {
+   "model": {
+    "auc": 0.763314,
+    "brier": 0.113751,
+    "log_loss": 0.383951,
+    "accuracy": 0.853466,
+    "n": 11929
+   },
+   "base_rate": {
+    "auc": 0.5,
+    "brier": 0.148602,
+    "log_loss": 0.478643,
+    "accuracy": 0.824797,
+    "n": 11929
+   },
+   "slot_mean": {
+    "auc": 0.786829,
+    "brier": 0.11863,
+    "log_loss": 0.722996,
+    "accuracy": 0.859418,
+    "n": 11929
+   },
+   "persistence": {
+    "auc": 0.580367,
+    "brier": 0.134704,
+    "log_loss": 0.4392,
+    "accuracy": 0.824797,
+    "n": 11929
+   },
+   "gbm": {
+    "auc": 0.750135,
+    "brier": 0.126147,
+    "log_loss": 0.452289,
+    "accuracy": 0.838209,
+    "n": 11929
+   }
+  },
+  "72": {
+   "model": {
+    "auc": 0.767722,
+    "brier": 0.113117,
+    "log_loss": 0.382391,
+    "accuracy": 0.854601,
+    "n": 11857
+   },
+   "base_rate": {
+    "auc": 0.5,
+    "brier": 0.149002,
+    "log_loss": 0.479649,
+    "accuracy": 0.824239,
+    "n": 11857
+   },
+   "slot_mean": {
+    "auc": 0.789773,
+    "brier": 0.116061,
+    "log_loss": 0.681945,
+    "accuracy": 0.861854,
+    "n": 11857
+   },
+   "persistence": {
+    "auc": 0.55381,
+    "brier": 0.138975,
+    "log_loss": 0.451574,
+    "accuracy": 0.824239,
+    "n": 11857
+   },
+   "gbm": {
+    "auc": 0.750125,
+    "brier": 0.131102,
+    "log_loss": 0.462362,
+    "accuracy": 0.827022,
+    "n": 11857
+   }
+  }
+ },
+ "learning_curve": {
+  "3": {
+   "auc": 0.660258,
+   "brier": 0.146516,
+   "log_loss": 0.469333,
+   "n": 12064
+  },
+  "7": {
+   "auc": 0.791691,
+   "brier": 0.109715,
+   "log_loss": 0.364226,
+   "n": 12064
+  },
+  "14": {
+   "auc": 0.826021,
+   "brier": 0.106184,
+   "log_loss": 0.349538,
+   "n": 12064
+  },
+  "28": {
+   "auc": 0.835488,
+   "brier": 0.105603,
+   "log_loss": 0.344966,
+   "n": 12064
+  }
+ },
+ "cold_start": {
+  "with_prior": {
+   "auc": 0.817731,
+   "brier": 0.21729,
+   "log_loss": 0.62958,
+   "n": 504
+  },
+  "flat_prior": {
+   "auc": 0.80018,
+   "brier": 0.167566,
+   "log_loss": 0.523849,
+   "n": 504
+  }
+ },
+ "calibration": [
+  {
+   "bin_low": 0.0,
+   "bin_high": 0.1,
+   "predicted": 0.069113,
+   "observed": 0.105499,
+   "n": 891
+  },
+  {
+   "bin_low": 0.1,
+   "bin_high": 0.2,
+   "predicted": 0.149759,
+   "observed": 0.213374,
+   "n": 2273
+  },
+  {
+   "bin_low": 0.2,
+   "bin_high": 0.3,
+   "predicted": 0.251955,
+   "observed": 0.325486,
+   "n": 1954
+  },
+  {
+   "bin_low": 0.3,
+   "bin_high": 0.4,
+   "predicted": 0.348501,
+   "observed": 0.457582,
+   "n": 1886
+  },
+  {
+   "bin_low": 0.4,
+   "bin_high": 0.5,
+   "predicted": 0.44966,
+   "observed": 0.538021,
+   "n": 1920
+  },
+  {
+   "bin_low": 0.5,
+   "bin_high": 0.6,
+   "predicted": 0.552145,
+   "observed": 0.621965,
+   "n": 2595
+  },
+  {
+   "bin_low": 0.6,
+   "bin_high": 0.7,
+   "predicted": 0.647238,
+   "observed": 0.709708,
+   "n": 3152
+  },
+  {
+   "bin_low": 0.7,
+   "bin_high": 0.8,
+   "predicted": 0.753948,
+   "observed": 0.77635,
+   "n": 5057
+  },
+  {
+   "bin_low": 0.8,
+   "bin_high": 0.9,
+   "predicted": 0.856061,
+   "observed": 0.819253,
+   "n": 11884
+  },
+  {
+   "bin_low": 0.9,
+   "bin_high": 1.0,
+   "predicted": 0.950845,
+   "observed": 0.92836,
+   "n": 52401
+  }
+ ],
+ "params": {
+  "b0": 0.267272,
+  "b1": 1.291537,
+  "b2": 1.363076,
+  "tau_hours": 12.0,
+  "half_life_days": 14.0,
+  "prior_strength": 1.0
+ },
+ "fold_params": [
+  {
+   "held_out": "aruba",
+   "b0": 0.257569,
+   "b1": 8.336804,
+   "b2": 1.970412,
+   "tau_hours": 12.0,
+   "half_life_days": 7.0,
+   "prior_strength": 8.0
+  },
+  {
+   "held_out": "tulum1",
+   "b0": 0.271724,
+   "b1": 1.21127,
+   "b2": 1.285798,
+   "tau_hours": 12.0,
+   "half_life_days": 14.0,
+   "prior_strength": 1.0
+  },
+  {
+   "held_out": "tulum2",
+   "b0": 0.376945,
+   "b1": 1.438691,
+   "b2": 1.529793,
+   "tau_hours": 3.0,
+   "half_life_days": 56.0,
+   "prior_strength": 2.0
+  }
+ ],
+ "caveats": [
+  "Only 3 homes were usable, so each fold trains on 2 and the results are fragile.",
+  "Tulum 1 and Tulum 2 are two periods of the same CASAS testbed and may be one household. Holding one out leaves the other in training, so the evaluation is closer to two independent households than three.",
+  "The homes come from the CASAS research project. None is a Filipino household, and the forecast was not tested on housemates sharing a flat.",
+  "A label marks a household leaving or coming back, not a person. Some of these homes are reported to have two residents.",
+  "An hour counts as home when the labels say someone was home for 30 minutes or more of it.",
+  "Every forecast uses only earlier hours, and the held out home never influenced its own coefficients. One yes or no choice, the flat prior, was made by comparing held out first week forecasts, so the headline numbers are slightly optimistic.",
+  "Both sides of the first week comparison use coefficients fitted with the population prior.",
+  "Forecasts were evaluated from 1 to 72 hours ahead only, and the app shows nothing further out.",
+  "Ranking housemates and the best two hour window are built on this forecast but are not evaluated separately."
+ ],
+ "questions": [
+  {
+   "id": "q1",
+   "question": "Does a per person habit profile forecast better than the simple baselines?",
+   "answer": "The model has the lowest Brier score of the three simple forecasts at 7 of 7 horizons and the highest AUC at 2 of 7. At 3 hours ahead: model 0.111 (AUC 0.831), plain hour of week average 0.120 (AUC 0.787), same as right now 0.133 (AUC 0.659), base rate 0.149."
+  },
+  {
+   "id": "q2",
+   "question": "How many days of history does it need?",
+   "answer": "AUC at 3 hours ahead when the forecast sees only the last N days of history: 3 days 0.660, 7 days 0.792, 14 days 0.826, 28 days 0.835."
+  },
+  {
+   "id": "q3",
+   "question": "Does the population prior help a brand new member in their first week?",
+   "answer": "In a new home's first 7 days the population prior hurts: Brier 0.217 with it, 0.168 with a flat 0.5 prior. The model therefore starts every member from a flat 50 percent."
+  },
+  {
+   "id": "q4",
+   "question": "How much does a heavier model improve on the small one?",
+   "answer": "The gradient boosted yardstick scores Brier 0.117 (AUC 0.825) at 3 hours ahead against 0.111 (AUC 0.831) for the small model."
+  }
+ ]
+}
